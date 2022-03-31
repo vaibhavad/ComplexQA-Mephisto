@@ -1,0 +1,10 @@
+#@package _global_
+defaults:
+  - /mephisto/blueprint: parlai_chat
+  - /mephisto/architect: local
+  - /mephisto/provider: mock
+mephisto:
+  blueprint:
+    world_file: ${task_dir}/demo_worlds.py
+    task_description_file: ${task_dir}/task_description.html
+    num_conversations: 1
