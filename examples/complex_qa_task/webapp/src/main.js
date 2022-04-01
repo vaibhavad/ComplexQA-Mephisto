@@ -8,9 +8,9 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import "bootstrap-chat/styles.css";
+import "../../../../packages/bootstrap-chat/styles.css";
 
-import { ChatApp, ChatMessage, DefaultTaskDescription } from "bootstrap-chat";
+import { ChatApp, ChatMessage, DefaultTaskDescription } from "../../../../packages/bootstrap-chat";
 
 function RenderChatMessage({ message, mephistoContext, appContext, idx }) {
   const { agentId } = mephistoContext;
@@ -34,6 +34,7 @@ function RenderChatMessage({ message, mephistoContext, appContext, idx }) {
 }
 
 function MainApp() {
+  console.log("MainApp");
   return (
     <ChatApp
       renderMessage={({ message, idx, mephistoContext, appContext }) => (

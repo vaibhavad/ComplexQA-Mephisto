@@ -5,6 +5,6 @@ defaults:
   - /mephisto/provider: mock
 mephisto:
   blueprint:
-    world_file: ${task_dir}/demo_worlds.py
+    world_file: ${task_dir}/worlds.py
     task_description_file: ${task_dir}/task_description.html
     num_conversations: 1
