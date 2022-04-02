@@ -34,11 +34,12 @@ class MultiAgentDialogWorld(CrowdTaskWorld):
     input the actions of all other agents since that agent last acted.
     """
 
-    def __init__(self, opt, agents=None, shared=None):
+    def __init__(self, opt, agents=None, dataloader=None, shared=None):
         # Add passed in agents directly.
         self.agents = agents
         # As we are working with only one agent
         self.agent = agents[0]
+        self.dataloader = dataloader
         self.act = None
         self.episodeDone = False
         self.max_turns = opt.get("max_turns", 2)
@@ -112,7 +113,7 @@ def validate_onboarding(data):
 
 
 def make_world(opt, agents):
-    return MultiAgentDialogWorld(opt, agents)
+    return MultiAgentDialogWorld(opt, agents, dataloader=opt["dataloader"])
 
 
 def get_world_params():
