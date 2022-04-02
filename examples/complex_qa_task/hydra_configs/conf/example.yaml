@@ -10,3 +10,7 @@ mephisto:
       This is a task to collect complex questions from conversational questions.
     task_reward: 0.3
     task_tags: "question answering, chat, complex questions"
+dataloader:
+  module_name: mephisto.operations.data_loader
+  class_name: TopiOCQAQADataLoader
+  datapath: /Users/vaibhav.adlakha/Desktop/topiocqa/topiocqa_train.json

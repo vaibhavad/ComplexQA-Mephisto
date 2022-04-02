@@ -17,6 +17,21 @@ from mephisto.abstractions.blueprints.parlai_chat.parlai_chat_blueprint import (
 from omegaconf import DictConfig
 from dataclasses import dataclass, field
 
+@dataclass
+class DataLoaderConfig:
+    module_name: str = field(
+        default="",
+        metadata={"help": ""}
+    )
+    class_name: str = field(
+        default="",
+        metadata={"help": ""}
+    )
+    datapath: str = field(
+        default="",
+        metadata={"help": ""}
+    )
+
 
 @dataclass
 class ParlAITaskConfig(build_default_task_config("example")):  # type: ignore
@@ -31,6 +46,7 @@ class ParlAITaskConfig(build_default_task_config("example")):  # type: ignore
             "a worker out, default 300 seconds"
         },
     )
+    dataloader: DataLoaderConfig = DataLoaderConfig()
 
 
 @task_script(config=ParlAITaskConfig)
