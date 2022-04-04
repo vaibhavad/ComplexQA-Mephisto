@@ -1,0 +1,12 @@
+#@package _global_
+defaults:
+  - base
+num_turns: 10
+mephisto:
+  task:
+    task_name: complexqa-chat
+    task_title: "Complex QA Collection Task"
+    task_description: >
+      This is a task to collect complex questions from conversational questions.
+    task_reward: 0.3
+    task_tags: "question answering, chat, complex questions"
