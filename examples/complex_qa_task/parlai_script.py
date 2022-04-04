@@ -13,9 +13,25 @@ from mephisto.abstractions.blueprints.parlai_chat.parlai_chat_blueprint import (
     BLUEPRINT_TYPE_PARLAI_CHAT,
     SharedParlAITaskState,
 )
+from mephisto.operations.data_loader import TopiOCQAQADataLoader
 
 from omegaconf import DictConfig
 from dataclasses import dataclass, field
+
+@dataclass
+class DataLoaderConfig:
+    module_name: str = field(
+        default="",
+        metadata={"help": ""}
+    )
+    class_name: str = field(
+        default="",
+        metadata={"help": ""}
+    )
+    datapath: str = field(
+        default="",
+        metadata={"help": ""}
+    )
 
 
 @dataclass
@@ -31,6 +47,7 @@ class ParlAITaskConfig(build_default_task_config("example")):  # type: ignore
             "a worker out, default 300 seconds"
         },
     )
+    dataloader: DataLoaderConfig = DataLoaderConfig()
 
 
 @task_script(config=ParlAITaskConfig)
@@ -45,6 +62,10 @@ def main(operator: "Operator", cfg: DictConfig) -> None:
             f"the {cfg.task_dir}/webapp directory in order to demo a custom bundle "
         )
         world_opt["send_task_data"] = True
+    
+    data_opt = cfg.dataloader
+    dataloader = TopiOCQAQADataLoader(data_opt)
+    world_opt["dataloader"] = dataloader
 
     shared_state = SharedParlAITaskState(
         world_opt=world_opt, onboarding_world_opt=world_opt

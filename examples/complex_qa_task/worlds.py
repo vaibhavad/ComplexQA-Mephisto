@@ -34,11 +34,12 @@ class MultiAgentDialogWorld(CrowdTaskWorld):
     input the actions of all other agents since that agent last acted.
     """
 
-    def __init__(self, opt, agents=None, shared=None):
+    def __init__(self, opt, agents=None, dataloader=None, shared=None):
         # Add passed in agents directly.
         self.agents = agents
         # As we are working with only one agent
         self.agent = agents[0]
+        self.dataloader = dataloader
         self.act = None
         self.episodeDone = False
         self.max_turns = opt.get("max_turns", 2)
@@ -47,34 +48,37 @@ class MultiAgentDialogWorld(CrowdTaskWorld):
         self.opt = opt
         self.agent.agent_id = f"Chat Agent"
     
-    def get_dummy_message(self):
+    def get_message(self, turn):
         return {
             "id": "System",
-            "text": "dummy mesage",
+            "text": form_message_from_conv_turn(turn),
             "episode_done": False,
         }
 
     def parley(self):
-        self.current_turns += 1
-        try:
-            self.agent.observe(self.get_dummy_message())
+        conv = self.dataloader.act()
+        self.max_turns = len(conv)
+        for turn in conv:
+            self.current_turns += 1
+            try:
+                self.agent.observe(self.get_message(turn))
 
-            self.act = self.agent.act(timeout=self.opt["turn_timeout"])
-            if self.send_task_data:
-                self.act.force_set(
-                    "task_data",
-                    {
-                        "last_acting_agent": self.agent.agent_id,
-                        "current_dialogue_turn": self.current_turns,
-                        "utterance_count": self.current_turns,
-                    },
-                )
-        except TypeError:
-            self.act = self.agent.act()  # not MTurkAgent
-        if self.act["episode_done"]:
-            self.episodeDone = True
-        if self.current_turns >= self.max_turns:
-            self.episodeDone = True
+                self.act = self.agent.act(timeout=self.opt["turn_timeout"])
+                if self.send_task_data:
+                    self.act.force_set(
+                        "task_data",
+                        {
+                            "last_acting_agent": self.agent.agent_id,
+                            "current_dialogue_turn": self.current_turns,
+                            "utterance_count": self.current_turns,
+                        },
+                    )
+            except TypeError:
+                self.act = self.agent.act()  # not MTurkAgent
+            if self.act["episode_done"]:
+                self.episodeDone = True
+            if self.current_turns >= self.max_turns:
+                self.episodeDone = True
 
     def prep_save_data(self, agent):
         """Process and return any additional data from this world you may want to store"""
@@ -101,6 +105,10 @@ class MultiAgentDialogWorld(CrowdTaskWorld):
         )
 
 
+def form_message_from_conv_turn(turn):
+    return f"The next turn of the conversation is \n\nQ: {turn['Question']}\nA: {turn['Answer']}\n\nPlease provide the re-formulated complex question below."
+
+
 def make_onboarding_world(opt, agent):
     return MultiAgentDialogOnboardWorld(opt, agent)
 
@@ -112,7 +120,7 @@ def validate_onboarding(data):
 
 
 def make_world(opt, agents):
-    return MultiAgentDialogWorld(opt, agents)
+    return MultiAgentDialogWorld(opt, agents, dataloader=opt["dataloader"])
 
 
 def get_world_params():
