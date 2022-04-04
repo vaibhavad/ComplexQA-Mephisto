@@ -5,14 +5,12 @@ mephisto:
   blueprint:
     custom_source_bundle: ${task_dir}/webapp/build/bundle.js
   task:
-    task_name: parlai-chat-example
-    task_title: "Test ParlAI Prebuilt Chat Task"
+    task_name: complexqa-chat
+    task_title: "Complex QA Collection Task"
     task_description: >
-      This is a simple chat between two people
-      used to demonstrate the functionalities around using Mephisto
-      for ParlAI tasks.
+      This is a task to collect complex questions from conversational questions.
     task_reward: 0.3
-    task_tags: "dynamic,chat,testing"
+    task_tags: "question answering, chat, complex questions"
 dataloader:
   module_name: mephisto.operations.data_loader
   class_name: TopiOCQAQADataLoader
