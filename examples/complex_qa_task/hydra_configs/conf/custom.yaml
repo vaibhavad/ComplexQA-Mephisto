@@ -13,3 +13,7 @@ mephisto:
       for ParlAI tasks.
     task_reward: 0.3
     task_tags: "dynamic,chat,testing"
+dataloader:
+  module_name: mephisto.operations.data_loader
+  class_name: TopiOCQAQADataLoader
+  datapath: /Users/vaibhav.adlakha/Desktop/topiocqa/topiocqa_train.json
