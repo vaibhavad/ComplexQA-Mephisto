@@ -20,7 +20,6 @@ function RenderChatMessage({ message, mephistoContext, appContext, idx }) {
   if ('text' in message && message.text.length > 0) {
 
     return (
-      <div onClick={() => alert("You clicked on message with index " + idx)}>
         <ChatMessage
           isSelf={message.id === agentId || message.id in currentAgentNames}
           agentName={
@@ -32,7 +31,6 @@ function RenderChatMessage({ message, mephistoContext, appContext, idx }) {
           taskData={message.task_data}
           messageId={message.update_id}
         />
-      </div>
     );
   }
   return null;
