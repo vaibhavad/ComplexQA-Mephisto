@@ -17,21 +17,25 @@ function RenderChatMessage({ message, mephistoContext, appContext, idx }) {
   const { agentId } = mephistoContext;
   const { currentAgentNames } = appContext.taskContext;
 
-  return (
-    <div onClick={() => alert("You clicked on message with index " + idx)}>
-      <ChatMessage
-        isSelf={message.id === agentId || message.id in currentAgentNames}
-        agentName={
-          message.id in currentAgentNames
-            ? currentAgentNames[message.id]
-            : message.id
-        }
-        message={message.text}
-        taskData={message.task_data}
-        messageId={message.update_id}
-      />
-    </div>
-  );
+  if ('text' in message && message.text.length > 0) {
+
+    return (
+      <div onClick={() => alert("You clicked on message with index " + idx)}>
+        <ChatMessage
+          isSelf={message.id === agentId || message.id in currentAgentNames}
+          agentName={
+            message.id in currentAgentNames
+              ? currentAgentNames[message.id]
+              : message.id
+          }
+          message={message.text}
+          taskData={message.task_data}
+          messageId={message.update_id}
+        />
+      </div>
+    );
+  }
+  return null;
 }
 
 function MainApp() {
@@ -64,11 +68,11 @@ function MainApp() {
           <p>The regular task description content will now appear below:</p>
         </DefaultTaskDescription>
       )}
-      renderTextResponse = {({ onMessageSend, inputMode, active, appContext, mephistoContext }) => (
+      renderTextResponse={({ onMessageSend, inputMode, active, appContext, mephistoContext }) => (
         <TextResponse
-            onMessageSend={onMessageSend}
-            active={inputMode === INPUT_MODE.READY_FOR_INPUT || inputMode === INPUT_MODE.READY_FOR_BOOL_INPUT}
-            boolResponse={boolResponse}
+          onMessageSend={onMessageSend}
+          active={inputMode === INPUT_MODE.READY_FOR_INPUT || inputMode === INPUT_MODE.READY_FOR_BOOL_INPUT}
+          boolResponse={boolResponse}
         />
       )}
       onMessagesChange={(messages) => {
@@ -77,6 +81,8 @@ function MainApp() {
           if ('requires_bool_input' in message) {
             if (message.requires_bool_input) {
               setBoolResponse(true);
+            } else {
+              setBoolResponse(false);
             }
           }
         }

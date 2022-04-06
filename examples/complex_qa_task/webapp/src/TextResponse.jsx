@@ -32,6 +32,15 @@ function TextResponse({ onMessageSend, active, boolResponse }) {
     }
   }, [textValue, active, sending, onMessageSend]);
 
+  const tryBoolMessageSend = React.useCallback((boolValue) => {
+    if (active && !sending) {
+      setSending(true);
+      onMessageSend({ boolValue: boolValue, task_data: {} }).then(() => {
+        setSending(false);
+      });
+    }
+  }, [active, sending, onMessageSend]);
+
   const handleKeyPress = React.useCallback(
     (e) => {
       if (e.key === "Enter") {
@@ -49,21 +58,17 @@ function TextResponse({ onMessageSend, active, boolResponse }) {
         <div className="response-bar">
           <Button
             className="btn btn-primary"
+            disabled={!active || sending}
+            onClick={() => tryBoolMessageSend(true)}
           >
             Yes
           </Button>
           <Button
             className="btn btn-primary"
+            disabled={!active || sending}
+            onClick={() => tryBoolMessageSend(false)}
           >
             No
-          </Button>
-          <Button
-            className="btn btn-primary submit-response"
-            id="id_send_msg_button"
-            disabled={textValue === "" || !active || sending}
-            onClick={() => tryMessageSend()}
-          >
-            Send
           </Button>
         </div>
       </div>
