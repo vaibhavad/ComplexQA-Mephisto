@@ -9,6 +9,9 @@
 import React from "react";
 import { FormControl, Button } from "react-bootstrap";
 
+const BOOL_MESSAGE = "It it possible to form complex question from the most recent QA pair?"
+const TEXT_INPUT_MESSAGE = "Please provide the complex question below"
+
 function TextResponse({ onMessageSend, active, boolResponse }) {
 
   const [textValue, setTextValue] = React.useState("");
@@ -55,7 +58,12 @@ function TextResponse({ onMessageSend, active, boolResponse }) {
   if (boolResponse) {
     return (
       <div className="response-type-module">
+        {/* TODO: add style */}
+        <div>
+          <p><b>{BOOL_MESSAGE}</b></p>
+        </div>
         <div className="response-bar">
+          {/* TODO: add style */}
           <Button
             className="btn btn-primary"
             disabled={!active || sending}
@@ -63,6 +71,7 @@ function TextResponse({ onMessageSend, active, boolResponse }) {
           >
             Yes
           </Button>
+          {/* TODO: add style */}
           <Button
             className="btn btn-primary"
             disabled={!active || sending}
@@ -77,6 +86,10 @@ function TextResponse({ onMessageSend, active, boolResponse }) {
   } else {
     return (
       <div className="response-type-module">
+        {/* TODO: add style */}
+        <div>
+          <p><b>{TEXT_INPUT_MESSAGE}</b></p>
+        </div>
         <div className="response-bar">
           <FormControl
             type="text"
