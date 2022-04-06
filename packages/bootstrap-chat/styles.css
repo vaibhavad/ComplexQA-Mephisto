@@ -110,3 +110,22 @@
   margin-left: 10px;
   padding: 0px;
 }
+
+.btn-bool {
+  font-size: 20px;
+  float: left;
+  margin-right: 2%;
+  padding-right: 5%;
+}
+
+.btn-yes {
+  background-color: #5cb85c;
+}
+
+.btn-no {
+  background-color: #d9534f;
+}
+
+.response-type-module-instruction {
+  font-size: 16px;
+}

@@ -58,26 +58,21 @@ function TextResponse({ onMessageSend, active, boolResponse }) {
   if (boolResponse) {
     return (
       <div className="response-type-module">
-        {/* TODO: add style */}
-        <div>
+        <div className="response-type-module-instruction">
           <p><b>{BOOL_MESSAGE}</b></p>
         </div>
         <div className="response-bar">
-          {/* TODO: add style */}
           <Button
-            className="btn btn-primary"
+            className="btn btn-primary btn-bool btn-yes"
             disabled={!active || sending}
             onClick={() => tryBoolMessageSend(true)}
-          >
-            Yes
+          ><span className="glyphicon glyphicon-ok" aria-hidden="true" /> Yes
           </Button>
-          {/* TODO: add style */}
           <Button
-            className="btn btn-primary"
+            className="btn btn-primary btn-bool btn-no"
             disabled={!active || sending}
             onClick={() => tryBoolMessageSend(false)}
-          >
-            No
+          ><span className="glyphicon glyphicon-remove" aria-hidden="true" /> No
           </Button>
         </div>
       </div>
@@ -86,8 +81,7 @@ function TextResponse({ onMessageSend, active, boolResponse }) {
   } else {
     return (
       <div className="response-type-module">
-        {/* TODO: add style */}
-        <div>
+        <div className="response-type-module-instruction">
           <p><b>{TEXT_INPUT_MESSAGE}</b></p>
         </div>
         <div className="response-bar">
