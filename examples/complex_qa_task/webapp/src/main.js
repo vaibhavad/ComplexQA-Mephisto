@@ -10,14 +10,20 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "../../../../packages/bootstrap-chat/styles.css";
 
-import { ChatApp, ChatMessage, DefaultTaskDescription, INPUT_MODE } from "../../../../packages/bootstrap-chat";
+import { ChatApp, DefaultTaskDescription, INPUT_MODE } from "../../../../packages/bootstrap-chat";
 import { TextResponse } from "./TextResponse.jsx"
+import ChatMessage from "./ChatMessage.jsx"
 
 function RenderChatMessage({ message, mephistoContext, appContext, idx }) {
   const { agentId } = mephistoContext;
   const { currentAgentNames } = appContext.taskContext;
 
   if ('text' in message && message.text.length > 0) {
+
+    var messageText = message.text;
+    if ('question' in message && 'answer' in message) {
+      messageText = message
+    }
 
     return (
         <ChatMessage
@@ -27,7 +33,7 @@ function RenderChatMessage({ message, mephistoContext, appContext, idx }) {
               ? currentAgentNames[message.id]
               : message.id
           }
-          message={message.text}
+          message={messageText}
           taskData={message.task_data}
           messageId={message.update_id}
         />

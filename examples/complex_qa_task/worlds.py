@@ -53,7 +53,9 @@ class MultiAgentDialogWorld(CrowdTaskWorld):
             return {
                 "id": "System",
                 "requires_bool_input": True,
-                "text": form_message_from_conv_turn(turn),
+                "text": " ",
+                "question": turn["Question"],
+                "answer": turn["Answer"],
                 "episode_done": False,
             }
         return {
@@ -116,10 +118,6 @@ class MultiAgentDialogWorld(CrowdTaskWorld):
         Parallel(n_jobs=len(self.agents), backend="threading")(
             delayed(shutdown_agent)(agent) for agent in self.agents
         )
-
-
-def form_message_from_conv_turn(turn):
-    return f"The next turn of the conversation is \n\nQ: {turn['Question']}\nA: {turn['Answer']}\n\nPlease provide the re-formulated complex question below."
 
 
 def make_onboarding_world(opt, agent):
