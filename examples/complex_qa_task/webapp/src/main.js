@@ -10,7 +10,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "../../../../packages/bootstrap-chat/styles.css";
 
-import { ChatApp, ChatMessage, DefaultTaskDescription } from "../../../../packages/bootstrap-chat";
+import { ChatApp, ChatMessage, DefaultTaskDescription, INPUT_MODE } from "../../../../packages/bootstrap-chat";
+import { TextResponse } from "./TextResponse.jsx"
 
 function RenderChatMessage({ message, mephistoContext, appContext, idx }) {
   const { agentId } = mephistoContext;
@@ -34,7 +35,8 @@ function RenderChatMessage({ message, mephistoContext, appContext, idx }) {
 }
 
 function MainApp() {
-  console.log("MainApp");
+
+  const [boolResponse, setBoolResponse] = React.useState(false);
   return (
     <ChatApp
       renderMessage={({ message, idx, mephistoContext, appContext }) => (
@@ -62,6 +64,23 @@ function MainApp() {
           <p>The regular task description content will now appear below:</p>
         </DefaultTaskDescription>
       )}
+      renderTextResponse = {({ onMessageSend, inputMode, active, appContext, mephistoContext }) => (
+        <TextResponse
+            onMessageSend={onMessageSend}
+            active={inputMode === INPUT_MODE.READY_FOR_INPUT || inputMode === INPUT_MODE.READY_FOR_BOOL_INPUT}
+            boolResponse={boolResponse}
+        />
+      )}
+      onMessagesChange={(messages) => {
+        if (messages && messages.length > 0) {
+          const message = messages[messages.length - 1]
+          if ('requires_bool_input' in message) {
+            if (message.requires_bool_input) {
+              setBoolResponse(true);
+            }
+          }
+        }
+      }}
     />
   );
 }

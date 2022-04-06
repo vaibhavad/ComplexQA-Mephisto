@@ -51,6 +51,7 @@ class MultiAgentDialogWorld(CrowdTaskWorld):
     def get_message(self, turn):
         return {
             "id": "System",
+            "requires_bool_input": True,
             "text": form_message_from_conv_turn(turn),
             "episode_done": False,
         }
