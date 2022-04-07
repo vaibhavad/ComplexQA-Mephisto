@@ -1,0 +1,72 @@
+<QuestionForm
+	xmlns='http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2005-10-01/QuestionForm.xsd'>
+	<Overview>
+		<Title>Given a complex question, determine how many hops of reasoning are required to answer it.</Title>
+	</Overview>
+	<Question>
+		<QuestionIdentifier>Q1</QuestionIdentifier>
+		<DisplayName>Q1</DisplayName>
+		<IsRequired>true</IsRequired>
+		<QuestionContent>
+			<Text>Q1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent varius faucibus neque.</Text>
+		</QuestionContent>
+		<AnswerSpecification>
+			<SelectionAnswer>
+				<StyleSuggestion>radiobutton</StyleSuggestion>
+				<Selections>
+					<Selection>
+						<SelectionIdentifier>Q1_1</SelectionIdentifier>
+						<Text>1</Text>
+					</Selection>
+					<Selection>
+						<SelectionIdentifier>Q1_2</SelectionIdentifier>
+						<Text>2</Text>
+					</Selection>
+					<Selection>
+						<SelectionIdentifier>Q1_3</SelectionIdentifier>
+						<Text>3</Text>
+					</Selection>
+					<Selection>
+						<SelectionIdentifier>Q1_4</SelectionIdentifier>
+						<Text>4</Text>
+					</Selection>
+				</Selections>
+			</SelectionAnswer>
+		</AnswerSpecification>
+	</Question>
+	<Question>
+		<QuestionIdentifier>Q2</QuestionIdentifier>
+		<DisplayName>Q2</DisplayName>
+		<IsRequired>true</IsRequired>
+		<QuestionContent>
+			<Text>Q2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent varius faucibus neque.</Text>
+		</QuestionContent>
+		<AnswerSpecification>
+			<SelectionAnswer>
+				<StyleSuggestion>radiobutton</StyleSuggestion>
+				<Selections>
+					<Selection>
+						<SelectionIdentifier>Q2_1</SelectionIdentifier>
+						<Text>1</Text>
+					</Selection>
+					<Selection>
+						<SelectionIdentifier>Q2_2</SelectionIdentifier>
+						<Text>2</Text>
+					</Selection>
+					<Selection>
+						<SelectionIdentifier>Q2_3</SelectionIdentifier>
+						<Text>3</Text>
+					</Selection>
+					<Selection>
+						<SelectionIdentifier>Q2_4</SelectionIdentifier>
+						<Text>4</Text>
+					</Selection>
+				</Selections>
+			</SelectionAnswer>
+		</AnswerSpecification>
+	</Question>
+	<Overview>
+		<Text>We hope this gave you an idea of what kinds of skills you will need for our task.</Text>
+		<Text>Don't worry if you can't get a full score. You can attempt this test multiple times. If you need help, you can email us at: placeholder@domain.com</Text>
+	</Overview>
+</QuestionForm>
