@@ -1,14 +1,25 @@
 <QuestionForm
 	xmlns='http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2005-10-01/QuestionForm.xsd'>
 	<Overview>
-		<Title>Given a complex question, determine how many hops of reasoning are required to answer it.</Title>
+		<Title>Complex Question Answering Qualification Test</Title>
+		<Text>You will have to answer TWO types of questions.</Text>
+		<Text>1. Given a dialogue and a combined COMPLEX question and answer, you will need to determine how many HOPS of reasoning are required to answer the COMPLEX question.</Text>
+		<Text>2. Given a dialogue and a combined COMPLEX question, you will need to select it's ANSWER from four candidates.</Text>
 	</Overview>
 	<Question>
 		<QuestionIdentifier>Q1</QuestionIdentifier>
 		<DisplayName>Q1</DisplayName>
 		<IsRequired>true</IsRequired>
 		<QuestionContent>
-			<Text>Q1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent varius faucibus neque.</Text>
+			<Text>1. Given the dialogue provided below, how many HOPS of reasoning are required to answer the combined COMPLEX question?</Text>
+            <Binary>
+				<MimeType>
+				  <Type>image</Type>
+				  <SubType>png</SubType>
+				</MimeType>
+				<DataURL>https://drive.google.com/uc?export=view&amp;id=1cz7foIiqViDcFirbTT7_TbiqP2Y2H1ZV</DataURL>
+				<AltText>Conversation</AltText>
+            </Binary>
 		</QuestionContent>
 		<AnswerSpecification>
 			<SelectionAnswer>
@@ -39,7 +50,15 @@
 		<DisplayName>Q2</DisplayName>
 		<IsRequired>true</IsRequired>
 		<QuestionContent>
-			<Text>Q2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent varius faucibus neque.</Text>
+			<Text>2. Given the dialogue provided below, how many HOPS of reasoning are required to answer the combined COMPLEX question?</Text>
+            <Binary>
+				<MimeType>
+				  <Type>image</Type>
+				  <SubType>png</SubType>
+				</MimeType>
+				<DataURL>https://drive.google.com/uc?export=view&amp;id=1Dyg7bfeoH1wMebZpBrfTFE8tGFjafD2E</DataURL>
+				<AltText>Conversation</AltText>
+            </Binary>
 		</QuestionContent>
 		<AnswerSpecification>
 			<SelectionAnswer>
@@ -65,6 +84,202 @@
 			</SelectionAnswer>
 		</AnswerSpecification>
 	</Question>
+	<Question>
+		<QuestionIdentifier>Q3</QuestionIdentifier>
+		<DisplayName>Q3</DisplayName>
+		<IsRequired>true</IsRequired>
+		<QuestionContent>
+			<Text>3. Given the dialogue provided below, how many HOPS of reasoning are required to answer the combined COMPLEX question?</Text>
+            <Binary>
+				<MimeType>
+				  <Type>image</Type>
+				  <SubType>png</SubType>
+				</MimeType>
+				<DataURL>https://drive.google.com/uc?export=view&amp;id=1lxAYi4GAiepbiaklH-XHlXeaOZWvx8rM</DataURL>
+				<AltText>Conversation</AltText>
+            </Binary>
+		</QuestionContent>
+		<AnswerSpecification>
+			<SelectionAnswer>
+				<StyleSuggestion>radiobutton</StyleSuggestion>
+				<Selections>
+					<Selection>
+						<SelectionIdentifier>Q3_1</SelectionIdentifier>
+						<Text>1</Text>
+					</Selection>
+					<Selection>
+						<SelectionIdentifier>Q3_2</SelectionIdentifier>
+						<Text>2</Text>
+					</Selection>
+					<Selection>
+						<SelectionIdentifier>Q3_3</SelectionIdentifier>
+						<Text>3</Text>
+					</Selection>
+					<Selection>
+						<SelectionIdentifier>Q3_4</SelectionIdentifier>
+						<Text>4</Text>
+					</Selection>
+				</Selections>
+			</SelectionAnswer>
+		</AnswerSpecification>
+	</Question>
+	<Question>
+		<QuestionIdentifier>Q4</QuestionIdentifier>
+		<DisplayName>Q4</DisplayName>
+		<IsRequired>true</IsRequired>
+		<QuestionContent>
+			<Text>4. Given the dialogue provided below, how many HOPS of reasoning are required to answer the combined COMPLEX question?</Text>
+            <Binary>
+				<MimeType>
+				  <Type>image</Type>
+				  <SubType>png</SubType>
+				</MimeType>
+				<DataURL>https://drive.google.com/uc?export=view&amp;id=19ILIpKrWFYCdDDFqG7KvBuuEhhiEH4Kf</DataURL>
+				<AltText>Conversation</AltText>
+            </Binary>
+		</QuestionContent>
+		<AnswerSpecification>
+			<SelectionAnswer>
+				<StyleSuggestion>radiobutton</StyleSuggestion>
+				<Selections>
+					<Selection>
+						<SelectionIdentifier>Q4_1</SelectionIdentifier>
+						<Text>1</Text>
+					</Selection>
+					<Selection>
+						<SelectionIdentifier>Q4_2</SelectionIdentifier>
+						<Text>2</Text>
+					</Selection>
+					<Selection>
+						<SelectionIdentifier>Q4_3</SelectionIdentifier>
+						<Text>3</Text>
+					</Selection>
+					<Selection>
+						<SelectionIdentifier>Q4_4</SelectionIdentifier>
+						<Text>4</Text>
+					</Selection>
+				</Selections>
+			</SelectionAnswer>
+		</AnswerSpecification>
+	</Question>
+	<Question>
+		<QuestionIdentifier>Q5</QuestionIdentifier>
+		<DisplayName>Q5</DisplayName>
+		<IsRequired>true</IsRequired>
+		<QuestionContent>
+			<Text>5. Given the dialogue provided below, how many HOPS of reasoning are required to answer the combined COMPLEX question?</Text>
+            <Binary>
+				<MimeType>
+				  <Type>image</Type>
+				  <SubType>png</SubType>
+				</MimeType>
+				<DataURL>https://drive.google.com/uc?export=view&amp;id=1F7btqz16HahnvlD4sKM8jNRYjoMny-yD</DataURL>
+				<AltText>Conversation</AltText>
+            </Binary>
+		</QuestionContent>
+		<AnswerSpecification>
+			<SelectionAnswer>
+				<StyleSuggestion>radiobutton</StyleSuggestion>
+				<Selections>
+					<Selection>
+						<SelectionIdentifier>Q5_1</SelectionIdentifier>
+						<Text>1</Text>
+					</Selection>
+					<Selection>
+						<SelectionIdentifier>Q5_2</SelectionIdentifier>
+						<Text>2</Text>
+					</Selection>
+					<Selection>
+						<SelectionIdentifier>Q5_3</SelectionIdentifier>
+						<Text>3</Text>
+					</Selection>
+					<Selection>
+						<SelectionIdentifier>Q5_4</SelectionIdentifier>
+						<Text>4</Text>
+					</Selection>
+				</Selections>
+			</SelectionAnswer>
+		</AnswerSpecification>
+	</Question>
+	<Question>
+		<QuestionIdentifier>Q6</QuestionIdentifier>
+		<DisplayName>Q6</DisplayName>
+		<IsRequired>true</IsRequired>
+		<QuestionContent>
+			<Text>6. Given the dialogue provided below, what is the answer to the combined COMPLEX question?</Text>
+            <Binary>
+				<MimeType>
+				  <Type>image</Type>
+				  <SubType>png</SubType>
+				</MimeType>
+				<DataURL>https://drive.google.com/uc?export=view&amp;id=1CspI6IsY_vsgo4A5jIXPzDFCAG79hq88</DataURL>
+				<AltText>Conversation</AltText>
+            </Binary>
+		</QuestionContent>
+		<AnswerSpecification>
+			<SelectionAnswer>
+				<StyleSuggestion>radiobutton</StyleSuggestion>
+				<Selections>
+					<Selection>
+						<SelectionIdentifier>Q6_1</SelectionIdentifier>
+						<Text>Nine.</Text>
+					</Selection>
+					<Selection>
+						<SelectionIdentifier>Q6_2</SelectionIdentifier>
+						<Text>It is cold and dense with a similar atmosphere to Earth.</Text>
+					</Selection>
+					<Selection>
+						<SelectionIdentifier>Q6_3</SelectionIdentifier>
+						<Text>It has a thick silicate mantle around an iron core, a substantial atmosphere, and evidence of internal geological activity. It is dry and denser than Earth.</Text>
+					</Selection>
+					<Selection>
+						<SelectionIdentifier>Q6_4</SelectionIdentifier>
+						<Text>It has an atmosphere consisting primarily of Nitrogen and Oxygen. It is primarily covered in water (70% of it's surface is covered by water). It also has many active volcanoes.</Text>
+					</Selection>
+				</Selections>
+			</SelectionAnswer>
+		</AnswerSpecification>
+	</Question>
+	<Question>
+		<QuestionIdentifier>Q7</QuestionIdentifier>
+		<DisplayName>Q7</DisplayName>
+		<IsRequired>true</IsRequired>
+		<QuestionContent>
+			<Text>7. Given the dialogue provided below, what is the answer to the combined COMPLEX question?</Text>
+            <Binary>
+				<MimeType>
+				  <Type>image</Type>
+				  <SubType>png</SubType>
+				</MimeType>
+				<DataURL>https://drive.google.com/uc?export=view&amp;id=1jyxAhYvnMYbGvDxs-UQkijMeQsxwDnMn</DataURL>
+				<AltText>Conversation</AltText>
+            </Binary>
+		</QuestionContent>
+		<AnswerSpecification>
+			<SelectionAnswer>
+				<StyleSuggestion>radiobutton</StyleSuggestion>
+				<Selections>
+					<Selection>
+						<SelectionIdentifier>Q7_1</SelectionIdentifier>
+						<Text>The Terminator franchise.</Text>
+					</Selection>
+					<Selection>
+						<SelectionIdentifier>Q7_2</SelectionIdentifier>
+						<Text>The Chronicles of Narnia.</Text>
+					</Selection>
+					<Selection>
+						<SelectionIdentifier>Q7_3</SelectionIdentifier>
+						<Text>Pirates of the Caribbean.</Text>
+					</Selection>
+					<Selection>
+						<SelectionIdentifier>Q7_4</SelectionIdentifier>
+						<Text>Harry Potter.</Text>
+					</Selection>
+				</Selections>
+			</SelectionAnswer>
+		</AnswerSpecification>
+	</Question>
+
 	<Overview>
 		<Text>We hope this gave you an idea of what kinds of skills you will need for our task.</Text>
 		<Text>Don't worry if you can't get a full score. You can attempt this test multiple times. If you need help, you can email us at: placeholder@domain.com</Text>
