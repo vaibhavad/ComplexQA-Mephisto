@@ -9,17 +9,17 @@ print(f"Deploying to {endpoint_url}.")
 
 thisdir = os.path.dirname(os.path.abspath(__file__))
 
-with open(f"{thisdir}/retrieve_qualification_test_questions.xml", "r") as f:
+with open(f"{thisdir}/questions.xml", "r") as f:
     questions = f.read()
 
-with open(f"{thisdir}/retrieve_qualification_test_answers.xml", "r") as f:
+with open(f"{thisdir}/answers.xml", "r") as f:
     answers = f.read()
 
 mturk = boto3.client("mturk", region_name="us-east-1", endpoint_url=endpoint_url)
 
 try:
     qual_response = mturk.create_qualification_type(
-        Name="Test v10",
+        Name="Test v28",
         Keywords="question,answer,dialog",
         Description="This is a brief qualification test showing how to form complex questions from dialogues. You can take it multiple times.",
         QualificationTypeStatus="Active",
