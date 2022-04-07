@@ -28,6 +28,7 @@ function BaseFrontend({
   renderMessage,
   renderTextResponse,
   renderResponse,
+  turnsRemaining,
 }) {
   const mephistoContext = React.useContext(MephistoContext);
   const appContext = React.useContext(AppContext);
@@ -46,7 +47,7 @@ function BaseFrontend({
         </div>
         <div className="chat-container-pane">
           <div className="right-top-pane">
-            <ChatStatusBar />
+            <ChatStatusBar turnsRemaining={turnsRemaining} />
             <ChatPane scrollBottomKey={messages.length + "-" + inputMode}>
               <div id="message_thread" style={{ width: "100%" }}>
                 {messages.map((message, idx) =>
@@ -87,12 +88,13 @@ function getWaitingMessage(agentStatus) {
     : "Waiting for the next person to speak...";
 }
 
-function ChatStatusBar() {
+function ChatStatusBar({ turnsRemaining }) {
   const { connectionStatus } = React.useContext(MephistoContext);
   const { appSettings, setAppSettings } = React.useContext(AppContext);
 
   return (
     <div className="chat-status-bar">
+      <div className="col-xs-5 chat-status-turns-remaining"><b>{parseInt(turnsRemaining)} turns remaining </b></div>
       <ConnectionIndicator connectionStatus={connectionStatus} />
       <VolumeControl
         volume={appSettings.volume}

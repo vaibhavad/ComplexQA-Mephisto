@@ -48,7 +48,7 @@ class MultiAgentDialogWorld(CrowdTaskWorld):
         self.opt = opt
         self.agent.agent_id = f"Chat Agent"
     
-    def get_message(self, turn=None, requires_bool=False, provide_more_questions=False):
+    def get_message(self, turn=None, turns_remaining=-1, requires_bool=False, provide_more_questions=False):
         if turn:
             return {
                 "id": "System",
@@ -57,6 +57,7 @@ class MultiAgentDialogWorld(CrowdTaskWorld):
                 "text": " ",
                 "question": turn["Question"],
                 "answer": turn["Answer"],
+                "turns_remaining": turns_remaining,
                 "episode_done": False,
             }
         return {
@@ -70,10 +71,10 @@ class MultiAgentDialogWorld(CrowdTaskWorld):
     def parley(self):
         conv = self.dataloader.act()
         self.max_turns = len(conv)
-        for turn in conv:
+        for i, turn in enumerate(conv):
             self.current_turns += 1
             try:
-                self.agent.observe(self.get_message(turn, requires_bool=True))
+                self.agent.observe(self.get_message(turn, self.max_turns - i, requires_bool=True))
 
                 self.act = self.agent.act(timeout=self.opt["turn_timeout"])
 

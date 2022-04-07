@@ -35,6 +35,7 @@ function ChatApp({
   renderResponse,
   onMessagesChange,
   defaultAppSettings = emptyAppSettings,
+  turnsRemaining,
 }) {
   const [taskContext, updateContext] = React.useReducer(
     (oldContext, newContext) => {
@@ -240,6 +241,7 @@ function ChatApp({
             renderSidePane={renderSidePane}
             renderTextResponse={renderTextResponse}
             renderResponse={renderResponse}
+            turnsRemaining={turnsRemaining}
           />
         </div>
       </AppContext.Provider>
