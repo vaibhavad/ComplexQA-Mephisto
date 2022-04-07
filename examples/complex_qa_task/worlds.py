@@ -48,10 +48,20 @@ class MultiAgentDialogWorld(CrowdTaskWorld):
         self.opt = opt
         self.agent.agent_id = f"Chat Agent"
     
-    def get_message(self, turn):
+    def get_message(self, turn=None):
+        if turn:
+            return {
+                "id": "System",
+                "requires_bool_input": True,
+                "text": " ",
+                "question": turn["Question"],
+                "answer": turn["Answer"],
+                "episode_done": False,
+            }
         return {
             "id": "System",
-            "text": form_message_from_conv_turn(turn),
+            "requires_bool_input": False,
+            "text": "",
             "episode_done": False,
         }
 
@@ -64,6 +74,11 @@ class MultiAgentDialogWorld(CrowdTaskWorld):
                 self.agent.observe(self.get_message(turn))
 
                 self.act = self.agent.act(timeout=self.opt["turn_timeout"])
+
+                if 'boolValue' in self.act and self.act["boolValue"]:
+                    self.agent.observe(self.get_message())
+                    self.act = self.agent.act(timeout=self.opt["turn_timeout"])
+
                 if self.send_task_data:
                     self.act.force_set(
                         "task_data",
@@ -103,10 +118,6 @@ class MultiAgentDialogWorld(CrowdTaskWorld):
         Parallel(n_jobs=len(self.agents), backend="threading")(
             delayed(shutdown_agent)(agent) for agent in self.agents
         )
-
-
-def form_message_from_conv_turn(turn):
-    return f"The next turn of the conversation is \n\nQ: {turn['Question']}\nA: {turn['Answer']}\n\nPlease provide the re-formulated complex question below."
 
 
 def make_onboarding_world(opt, agent):
