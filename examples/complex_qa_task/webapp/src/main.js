@@ -45,6 +45,8 @@ function RenderChatMessage({ message, mephistoContext, appContext, idx }) {
 function MainApp() {
 
   const [boolResponse, setBoolResponse] = React.useState(false);
+  const [boolResponseProvideMoreQuestions, setBoolResponseProvideMoreQuestions] = React.useState(false);
+
   return (
     <ChatApp
       renderMessage={({ message, idx, mephistoContext, appContext }) => (
@@ -77,6 +79,7 @@ function MainApp() {
           onMessageSend={onMessageSend}
           active={inputMode === INPUT_MODE.READY_FOR_INPUT || inputMode === INPUT_MODE.READY_FOR_BOOL_INPUT}
           boolResponse={boolResponse}
+          boolResponseProvideMoreQuestions={boolResponseProvideMoreQuestions}
         />
       )}
       onMessagesChange={(messages) => {
@@ -87,6 +90,13 @@ function MainApp() {
               setBoolResponse(true);
             } else {
               setBoolResponse(false);
+            }
+          }
+          if ('provide_more_questions' in message) {
+            if (message.provide_more_questions) {
+              setBoolResponseProvideMoreQuestions(true);
+            } else {
+              setBoolResponseProvideMoreQuestions(false);
             }
           }
         }

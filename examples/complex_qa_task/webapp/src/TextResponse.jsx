@@ -10,9 +10,10 @@ import React from "react";
 import { FormControl, Button } from "react-bootstrap";
 
 const BOOL_MESSAGE = "It it possible to form complex question from the most recent QA pair?"
+const BOOL_MORE_QUESTIONS_MESSAGE = "It is possible to form another complex question?"
 const TEXT_INPUT_MESSAGE = "Please provide the complex question below"
 
-function TextResponse({ onMessageSend, active, boolResponse }) {
+function TextResponse({ onMessageSend, active, boolResponse, boolResponseProvideMoreQuestions }) {
 
   const [textValue, setTextValue] = React.useState("");
   const [sending, setSending] = React.useState(false);
@@ -39,6 +40,15 @@ function TextResponse({ onMessageSend, active, boolResponse }) {
     if (active && !sending) {
       setSending(true);
       onMessageSend({ boolValue: boolValue, task_data: {} }).then(() => {
+        setSending(false);
+      });
+    }
+  }, [active, sending, onMessageSend]);
+
+  const tryBoolMessageProvideMoreQuestions = React.useCallback((boolValue) => {
+    if (active && !sending) {
+      setSending(true);
+      onMessageSend({ boolValueProvideMoreQuestions: boolValue, task_data: {} }).then(() => {
         setSending(false);
       });
     }
@@ -73,6 +83,29 @@ function TextResponse({ onMessageSend, active, boolResponse }) {
             disabled={!active || sending}
             onClick={() => tryBoolMessageSend(false)}
           ><span className="glyphicon glyphicon-remove" aria-hidden="true" /> No
+          </Button>
+        </div>
+      </div>
+    );
+
+  } else if (boolResponseProvideMoreQuestions) {
+    return (
+      <div className="response-type-module">
+        <div className="response-type-module-instruction">
+          <p><b>{BOOL_MORE_QUESTIONS_MESSAGE}</b></p>
+        </div>
+        <div className="response-bar">
+          <Button
+            className="btn btn-primary btn-bool"
+            disabled={!active || sending}
+            onClick={() => tryBoolMessageProvideMoreQuestions(true)}
+          ><span className="glyphicon" aria-hidden="true" /> Provide another question
+          </Button>
+          <Button
+            className="btn btn-primary btn-bool"
+            disabled={!active || sending}
+            onClick={() => tryBoolMessageProvideMoreQuestions(false)}
+          ><span className="glyphicon" aria-hidden="true" /> Move to next turn
           </Button>
         </div>
       </div>
