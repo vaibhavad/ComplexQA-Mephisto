@@ -48,19 +48,22 @@ class MultiAgentDialogWorld(CrowdTaskWorld):
         self.opt = opt
         self.agent.agent_id = f"Chat Agent"
     
-    def get_message(self, turn=None):
+    def get_message(self, turn=None, turns_remaining=-1, requires_bool=False, provide_more_questions=False):
         if turn:
             return {
                 "id": "System",
-                "requires_bool_input": True,
+                "requires_bool_input": requires_bool,
+                "provide_more_questions": provide_more_questions,
                 "text": " ",
                 "question": turn["Question"],
                 "answer": turn["Answer"],
+                "turns_remaining": turns_remaining,
                 "episode_done": False,
             }
         return {
             "id": "System",
-            "requires_bool_input": False,
+            "requires_bool_input": requires_bool,
+            "provide_more_questions": provide_more_questions,
             "text": "",
             "episode_done": False,
         }
@@ -68,16 +71,25 @@ class MultiAgentDialogWorld(CrowdTaskWorld):
     def parley(self):
         conv = self.dataloader.act()
         self.max_turns = len(conv)
-        for turn in conv:
+        for i, turn in enumerate(conv):
             self.current_turns += 1
             try:
-                self.agent.observe(self.get_message(turn))
+                self.agent.observe(self.get_message(turn, self.max_turns - i, requires_bool=True))
 
                 self.act = self.agent.act(timeout=self.opt["turn_timeout"])
 
                 if 'boolValue' in self.act and self.act["boolValue"]:
                     self.agent.observe(self.get_message())
                     self.act = self.agent.act(timeout=self.opt["turn_timeout"])
+
+                    provide_more_questions = True
+                    while provide_more_questions:
+                        self.agent.observe(self.get_message(provide_more_questions=True))
+                        self.act = self.agent.act(timeout=self.opt["turn_timeout"])
+                        provide_more_questions = self.act["boolValueProvideMoreQuestions"]
+                        if provide_more_questions:
+                            self.agent.observe(self.get_message())
+                            self.act = self.agent.act(timeout=self.opt["turn_timeout"])
 
                 if self.send_task_data:
                     self.act.force_set(

@@ -26,17 +26,17 @@ function RenderChatMessage({ message, mephistoContext, appContext, idx }) {
     }
 
     return (
-        <ChatMessage
-          isSelf={message.id === agentId || message.id in currentAgentNames}
-          agentName={
-            message.id in currentAgentNames
-              ? currentAgentNames[message.id]
-              : message.id
-          }
-          message={messageText}
-          taskData={message.task_data}
-          messageId={message.update_id}
-        />
+      <ChatMessage
+        isSelf={message.id === agentId || message.id in currentAgentNames}
+        agentName={
+          message.id in currentAgentNames
+            ? currentAgentNames[message.id]
+            : message.id
+        }
+        message={messageText}
+        taskData={message.task_data}
+        messageId={message.update_id}
+      />
     );
   }
   return null;
@@ -45,8 +45,12 @@ function RenderChatMessage({ message, mephistoContext, appContext, idx }) {
 function MainApp() {
 
   const [boolResponse, setBoolResponse] = React.useState(false);
+  const [boolResponseProvideMoreQuestions, setBoolResponseProvideMoreQuestions] = React.useState(false);
+  const [turnsRemaining, setTurnsRemaining] = React.useState(-1);
+
   return (
     <ChatApp
+    turnsRemaining={turnsRemaining}
       renderMessage={({ message, idx, mephistoContext, appContext }) => (
         <RenderChatMessage
           message={message}
@@ -77,6 +81,7 @@ function MainApp() {
           onMessageSend={onMessageSend}
           active={inputMode === INPUT_MODE.READY_FOR_INPUT || inputMode === INPUT_MODE.READY_FOR_BOOL_INPUT}
           boolResponse={boolResponse}
+          boolResponseProvideMoreQuestions={boolResponseProvideMoreQuestions}
         />
       )}
       onMessagesChange={(messages) => {
@@ -88,6 +93,16 @@ function MainApp() {
             } else {
               setBoolResponse(false);
             }
+          }
+          if ('provide_more_questions' in message) {
+            if (message.provide_more_questions) {
+              setBoolResponseProvideMoreQuestions(true);
+            } else {
+              setBoolResponseProvideMoreQuestions(false);
+            }
+          }
+          if ('turns_remaining' in message) {
+            setTurnsRemaining(message.turns_remaining);
           }
         }
       }}

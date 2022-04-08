@@ -26,8 +26,8 @@ function DoneButton({
       className="btn btn-primary btn-lg"
       onClick={() => onTaskComplete()}
     >
-      <span className="glyphicon glyphicon-ok-circle" aria-hidden="true" /> Done
-      with this HIT
+      <span className="glyphicon glyphicon-ok-circle" aria-hidden="true" /> Submit
+      HIT
     </button>
   );
   if (displayFeedback) {

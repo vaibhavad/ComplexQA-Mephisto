@@ -129,3 +129,9 @@
 .response-type-module-instruction {
   font-size: 16px;
 }
+
+.chat-status-turns-remaining {
+  font-size: 16px;
+  height: 100%;
+  padding-top: 0.5%;
+}
