@@ -19,7 +19,7 @@ mturk = boto3.client("mturk", region_name="us-east-1", endpoint_url=endpoint_url
 
 try:
     qual_response = mturk.create_qualification_type(
-        Name="Complex QA v0.0.15",
+        Name="Complex QA v0.0.24",
         Keywords="question,answer,dialog",
         Description="This is a brief qualification test showing how to form complex questions from dialogues. You can take it multiple times.",
         QualificationTypeStatus="Active",
