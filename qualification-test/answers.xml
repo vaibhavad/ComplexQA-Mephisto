@@ -8,7 +8,7 @@
 		</AnswerOption>
 		<AnswerOption>
 			<SelectionIdentifier>Q1_2</SelectionIdentifier>
-			<AnswerScore>1</AnswerScore>
+			<AnswerScore>0</AnswerScore>
 		</AnswerOption>
 		<AnswerOption>
 			<SelectionIdentifier>Q1_3</SelectionIdentifier>
@@ -16,7 +16,7 @@
 		</AnswerOption>
 		<AnswerOption>
 			<SelectionIdentifier>Q1_4</SelectionIdentifier>
-			<AnswerScore>0</AnswerScore>
+			<AnswerScore>1</AnswerScore>
 		</AnswerOption>
 	</Question>
 	<Question>
@@ -57,6 +57,102 @@
 			<AnswerScore>0</AnswerScore>
 		</AnswerOption>
 	</Question>
+	<Question>
+		<QuestionIdentifier>Q4</QuestionIdentifier>
+		<AnswerOption>
+			<SelectionIdentifier>Q4_1</SelectionIdentifier>
+			<AnswerScore>0</AnswerScore>
+		</AnswerOption>
+		<AnswerOption>
+			<SelectionIdentifier>Q4_2</SelectionIdentifier>
+			<AnswerScore>1</AnswerScore>
+		</AnswerOption>
+		<AnswerOption>
+			<SelectionIdentifier>Q4_3</SelectionIdentifier>
+			<AnswerScore>0</AnswerScore>
+		</AnswerOption>
+		<AnswerOption>
+			<SelectionIdentifier>Q4_4</SelectionIdentifier>
+			<AnswerScore>0</AnswerScore>
+		</AnswerOption>
+	</Question>
+	<Question>
+		<QuestionIdentifier>Q5</QuestionIdentifier>
+		<AnswerOption>
+			<SelectionIdentifier>Q5_1</SelectionIdentifier>
+			<AnswerScore>0</AnswerScore>
+		</AnswerOption>
+		<AnswerOption>
+			<SelectionIdentifier>Q5_2</SelectionIdentifier>
+			<AnswerScore>1</AnswerScore>
+		</AnswerOption>
+		<AnswerOption>
+			<SelectionIdentifier>Q5_3</SelectionIdentifier>
+			<AnswerScore>0</AnswerScore>
+		</AnswerOption>
+		<AnswerOption>
+			<SelectionIdentifier>Q5_4</SelectionIdentifier>
+			<AnswerScore>0</AnswerScore>
+		</AnswerOption>
+	</Question>
+	<Question>
+		<QuestionIdentifier>Q6</QuestionIdentifier>
+		<AnswerOption>
+			<SelectionIdentifier>Q6_1</SelectionIdentifier>
+			<AnswerScore>0</AnswerScore>
+		</AnswerOption>
+		<AnswerOption>
+			<SelectionIdentifier>Q6_2</SelectionIdentifier>
+			<AnswerScore>1</AnswerScore>
+		</AnswerOption>
+		<AnswerOption>
+			<SelectionIdentifier>Q6_3</SelectionIdentifier>
+			<AnswerScore>0</AnswerScore>
+		</AnswerOption>
+		<AnswerOption>
+			<SelectionIdentifier>Q6_4</SelectionIdentifier>
+			<AnswerScore>1</AnswerScore>
+		</AnswerOption>
+		<AnswerOption>
+			<SelectionIdentifier>Q6_5</SelectionIdentifier>
+			<AnswerScore>1</AnswerScore>
+		</AnswerOption>
+	</Question>
+	<Question>
+		<QuestionIdentifier>Q7</QuestionIdentifier>
+		<AnswerOption>
+			<SelectionIdentifier>Q7_1</SelectionIdentifier>
+			<AnswerScore>0</AnswerScore>
+		</AnswerOption>
+		<AnswerOption>
+			<SelectionIdentifier>Q7_2</SelectionIdentifier>
+			<AnswerScore>1</AnswerScore>
+		</AnswerOption>
+		<AnswerOption>
+			<SelectionIdentifier>Q7_3</SelectionIdentifier>
+			<AnswerScore>1</AnswerScore>
+		</AnswerOption>
+	</Question>
+	<Question>
+		<QuestionIdentifier>Q8</QuestionIdentifier>
+		<AnswerOption>
+			<SelectionIdentifier>Q8_1</SelectionIdentifier>
+			<AnswerScore>1</AnswerScore>
+		</AnswerOption>
+		<AnswerOption>
+			<SelectionIdentifier>Q8_2</SelectionIdentifier>
+			<AnswerScore>0</AnswerScore>
+		</AnswerOption>
+		<AnswerOption>
+			<SelectionIdentifier>Q8_3</SelectionIdentifier>
+			<AnswerScore>0</AnswerScore>
+		</AnswerOption>
+		<AnswerOption>
+			<SelectionIdentifier>Q8_4</SelectionIdentifier>
+			<AnswerScore>1</AnswerScore>
+		</AnswerOption>
+	</Question>
+
 	<QualificationValueMapping>
 		<PercentageMapping>
 			<MaximumSummedScore>3</MaximumSummedScore>
