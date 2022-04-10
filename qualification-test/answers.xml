@@ -155,7 +155,7 @@
 
 	<QualificationValueMapping>
 		<PercentageMapping>
-			<MaximumSummedScore>3</MaximumSummedScore>
+			<MaximumSummedScore>12</MaximumSummedScore>
 		</PercentageMapping>
 	</QualificationValueMapping>
 </AnswerKey>
