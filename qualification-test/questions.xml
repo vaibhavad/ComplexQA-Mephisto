@@ -2,16 +2,14 @@
 	xmlns='http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2005-10-01/QuestionForm.xsd'>
 	<Overview>
 		<Title>Complex Question Answering Qualification Test</Title>
-		<Text>You will have to answer TWO types of questions.</Text>
-		<Text>1. Given a dialogue and a combined COMPLEX question and answer, you will need to determine how many HOPS of reasoning are required to answer the COMPLEX question.</Text>
-		<Text>2. Given a dialogue and a combined COMPLEX question, you will need to select it's ANSWER from four candidates.</Text>
+        <Text>Before completing our qualification test, please refer to our instructions: https://placeholder.com.</Text>
 	</Overview>
 	<Question>
 		<QuestionIdentifier>Q1</QuestionIdentifier>
 		<DisplayName>Q1</DisplayName>
 		<IsRequired>true</IsRequired>
 		<QuestionContent>
-			<Text>1. Given the dialogue provided below, how many HOPS of reasoning are required to answer the combined COMPLEX question?</Text>
+			<Text>1. Given the dialogue provided below, how many STEPS of reasoning are required to answer the combined COMPLEX question?</Text>
             <Binary>
 				<MimeType>
 				  <Type>image</Type>
@@ -50,7 +48,7 @@
 		<DisplayName>Q2</DisplayName>
 		<IsRequired>true</IsRequired>
 		<QuestionContent>
-			<Text>2. Given the dialogue provided below, how many HOPS of reasoning are required to answer the combined COMPLEX question?</Text>
+			<Text>2. Given the dialogue provided below, how many STEPS of reasoning are required to answer the combined COMPLEX question?</Text>
             <Binary>
 				<MimeType>
 				  <Type>image</Type>
@@ -89,7 +87,7 @@
 		<DisplayName>Q3</DisplayName>
 		<IsRequired>true</IsRequired>
 		<QuestionContent>
-			<Text>3. Given the dialogue provided below, how many HOPS of reasoning are required to answer the combined COMPLEX question?</Text>
+			<Text>3. Given the dialogue provided below, how many STEPS of reasoning are required to answer the combined COMPLEX question?</Text>
             <Binary>
 				<MimeType>
 				  <Type>image</Type>
@@ -128,13 +126,13 @@
 		<DisplayName>Q4</DisplayName>
 		<IsRequired>true</IsRequired>
 		<QuestionContent>
-			<Text>4. Given the dialogue provided below, how many HOPS of reasoning are required to answer the combined COMPLEX question?</Text>
+			<Text>4. Given the dialogue provided below, select which question listed below is a COMPLEX question.</Text>
             <Binary>
 				<MimeType>
 				  <Type>image</Type>
 				  <SubType>png</SubType>
 				</MimeType>
-				<DataURL>https://drive.google.com/uc?export=view&amp;id=19ILIpKrWFYCdDDFqG7KvBuuEhhiEH4Kf</DataURL>
+                <DataURL>https://drive.google.com/uc?export=view&amp;id=1E5093GGyyd8iiQCv872OvVn2xrHqiICu</DataURL>
 				<AltText>Conversation</AltText>
             </Binary>
 		</QuestionContent>
@@ -144,19 +142,19 @@
 				<Selections>
 					<Selection>
 						<SelectionIdentifier>Q4_1</SelectionIdentifier>
-						<Text>1</Text>
+						<Text>How old was the actor who played Anakin Skywalker in Return of the Jedi when the movie was filmed?</Text>
 					</Selection>
 					<Selection>
 						<SelectionIdentifier>Q4_2</SelectionIdentifier>
-						<Text>2</Text>
+						<Text>When did the actor who played Anakin Skywalker in Return of the Jedi start his career?</Text>
 					</Selection>
 					<Selection>
 						<SelectionIdentifier>Q4_3</SelectionIdentifier>
-						<Text>3</Text>
+						<Text>Where is the actor who played Anakin Skywalker in Return of the Jedi from?</Text>
 					</Selection>
 					<Selection>
 						<SelectionIdentifier>Q4_4</SelectionIdentifier>
-						<Text>4</Text>
+						<Text>When did Sebastian Lewis Shaw start his career?</Text>
 					</Selection>
 				</Selections>
 			</SelectionAnswer>
@@ -167,13 +165,13 @@
 		<DisplayName>Q5</DisplayName>
 		<IsRequired>true</IsRequired>
 		<QuestionContent>
-			<Text>5. Given the dialogue provided below, how many HOPS of reasoning are required to answer the combined COMPLEX question?</Text>
+			<Text>5. Given the dialogue provided below, select which question listed below is a COMPLEX question.</Text>
             <Binary>
 				<MimeType>
 				  <Type>image</Type>
 				  <SubType>png</SubType>
 				</MimeType>
-				<DataURL>https://drive.google.com/uc?export=view&amp;id=1F7btqz16HahnvlD4sKM8jNRYjoMny-yD</DataURL>
+                <DataURL>https://drive.google.com/uc?export=view&amp;id=1HeQu7mOXAgVbkE_TG4NgMk29mmwPlKAy</DataURL>
 				<AltText>Conversation</AltText>
             </Binary>
 		</QuestionContent>
@@ -182,20 +180,20 @@
 				<StyleSuggestion>radiobutton</StyleSuggestion>
 				<Selections>
 					<Selection>
-						<SelectionIdentifier>Q5_1</SelectionIdentifier>
-						<Text>1</Text>
+						<SelectionIdentifier>Q4_1</SelectionIdentifier>
+						<Text>Who is the brother of the actor who played Lee Chandler in the film Manchester by the Sea?</Text>
 					</Selection>
 					<Selection>
-						<SelectionIdentifier>Q5_2</SelectionIdentifier>
-						<Text>2</Text>
+						<SelectionIdentifier>Q4_2</SelectionIdentifier>
+						<Text>Who were the parents of the actor who played Lee Chandler in the film Manchester by the Sea?</Text>
 					</Selection>
 					<Selection>
-						<SelectionIdentifier>Q5_3</SelectionIdentifier>
-						<Text>3</Text>
+						<SelectionIdentifier>Q4_3</SelectionIdentifier>
+						<Text>Who were Ben and Casey Affleck's parrents?</Text>
 					</Selection>
 					<Selection>
-						<SelectionIdentifier>Q5_4</SelectionIdentifier>
-						<Text>4</Text>
+						<SelectionIdentifier>Q4_4</SelectionIdentifier>
+						<Text>Where was Casey Affleck who played Lee Chandler in the film Manchester by the Sea born?</Text>
 					</Selection>
 				</Selections>
 			</SelectionAnswer>
@@ -206,35 +204,35 @@
 		<DisplayName>Q6</DisplayName>
 		<IsRequired>true</IsRequired>
 		<QuestionContent>
-			<Text>6. Given the dialogue provided below, what is the answer to the combined COMPLEX question?</Text>
+			<Text>6. Given the dialogue and COMPLEX question provided below, select the questions (Question 1, Question 2, Question 3, etc.) used to form the COMPLEX question.</Text>
             <Binary>
 				<MimeType>
 				  <Type>image</Type>
 				  <SubType>png</SubType>
 				</MimeType>
-				<DataURL>https://drive.google.com/uc?export=view&amp;id=1CspI6IsY_vsgo4A5jIXPzDFCAG79hq88</DataURL>
+                <DataURL>https://drive.google.com/uc?export=view&amp;id=1fExuHVu7K0lJpEEQt_rjlgn9Dpfqjq6O</DataURL>
 				<AltText>Conversation</AltText>
             </Binary>
 		</QuestionContent>
 		<AnswerSpecification>
 			<SelectionAnswer>
-				<StyleSuggestion>radiobutton</StyleSuggestion>
+				<StyleSuggestion>checkbox</StyleSuggestion>
 				<Selections>
 					<Selection>
 						<SelectionIdentifier>Q6_1</SelectionIdentifier>
-						<Text>Nine.</Text>
+						<Text> Question 1</Text>
 					</Selection>
 					<Selection>
 						<SelectionIdentifier>Q6_2</SelectionIdentifier>
-						<Text>It is cold and dense with a similar atmosphere to Earth.</Text>
+                        <Text> Question 2</Text>
 					</Selection>
 					<Selection>
 						<SelectionIdentifier>Q6_3</SelectionIdentifier>
-						<Text>It has a thick silicate mantle around an iron core, a substantial atmosphere, and evidence of internal geological activity. It is dry and denser than Earth.</Text>
+						<Text> Question 3</Text>
 					</Selection>
 					<Selection>
 						<SelectionIdentifier>Q6_4</SelectionIdentifier>
-						<Text>It has an atmosphere consisting primarily of Nitrogen and Oxygen. It is primarily covered in water (70% of it's surface is covered by water). It also has many active volcanoes.</Text>
+						<Text> Question 4</Text>
 					</Selection>
 				</Selections>
 			</SelectionAnswer>
@@ -245,35 +243,31 @@
 		<DisplayName>Q7</DisplayName>
 		<IsRequired>true</IsRequired>
 		<QuestionContent>
-			<Text>7. Given the dialogue provided below, what is the answer to the combined COMPLEX question?</Text>
+			<Text>7. Given the dialogue and COMPLEX question provided below, select the questions (Question 1, Question 2, Question 3, etc.) used to form the COMPLEX question.</Text>
             <Binary>
 				<MimeType>
 				  <Type>image</Type>
 				  <SubType>png</SubType>
 				</MimeType>
-				<DataURL>https://drive.google.com/uc?export=view&amp;id=1jyxAhYvnMYbGvDxs-UQkijMeQsxwDnMn</DataURL>
+                <DataURL>https://drive.google.com/uc?export=view&amp;id=1EDjjEqaggNwsHaZygP1r9KA5m9SOlEve</DataURL>
 				<AltText>Conversation</AltText>
             </Binary>
 		</QuestionContent>
 		<AnswerSpecification>
 			<SelectionAnswer>
-				<StyleSuggestion>radiobutton</StyleSuggestion>
+				<StyleSuggestion>checkbox</StyleSuggestion>
 				<Selections>
 					<Selection>
 						<SelectionIdentifier>Q7_1</SelectionIdentifier>
-						<Text>The Terminator franchise.</Text>
+						<Text> Question 1</Text>
 					</Selection>
 					<Selection>
 						<SelectionIdentifier>Q7_2</SelectionIdentifier>
-						<Text>The Chronicles of Narnia.</Text>
+                        <Text> Question 2</Text>
 					</Selection>
 					<Selection>
 						<SelectionIdentifier>Q7_3</SelectionIdentifier>
-						<Text>Pirates of the Caribbean.</Text>
-					</Selection>
-					<Selection>
-						<SelectionIdentifier>Q7_4</SelectionIdentifier>
-						<Text>Harry Potter.</Text>
+						<Text> Question 3</Text>
 					</Selection>
 				</Selections>
 			</SelectionAnswer>
