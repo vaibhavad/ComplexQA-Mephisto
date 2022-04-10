@@ -15,7 +15,7 @@
 				  <Type>image</Type>
 				  <SubType>png</SubType>
 				</MimeType>
-				<DataURL>https://drive.google.com/uc?export=view&amp;id=1cz7foIiqViDcFirbTT7_TbiqP2Y2H1ZV</DataURL>
+                <DataURL>https://drive.google.com/uc?export=view&amp;id=1cz7foIiqViDcFirbTT7_TbiqP2Y2H1ZV</DataURL>
 				<AltText>Conversation</AltText>
             </Binary>
 		</QuestionContent>
@@ -273,7 +273,6 @@
 			</SelectionAnswer>
 		</AnswerSpecification>
 	</Question>
-
 	<Overview>
 		<Text>We hope this gave you an idea of what kinds of skills you will need for our task.</Text>
 		<Text>Don't worry if you can't get a full score. You can attempt this test multiple times. If you need help, you can email us at: placeholder@domain.com</Text>
