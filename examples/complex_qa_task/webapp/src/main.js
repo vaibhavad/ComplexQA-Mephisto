@@ -12,6 +12,7 @@ import "../../../../packages/bootstrap-chat/styles.css";
 
 import { ChatApp, INPUT_MODE } from "../../../../packages/bootstrap-chat";
 import { TextResponse } from "./TextResponse.jsx"
+import { ProvidedQuestions } from "./ProvidedQuestions.jsx"
 import { DefaultTaskDescription } from "./DefaultTaskDescription.jsx"
 import ChatMessage from "./ChatMessage.jsx"
 
@@ -71,6 +72,8 @@ function MainApp() {
               task description will appear here.
           </p>
         </DefaultTaskDescription>
+          <ProvidedQuestions providedQuestions={providedQuestions} />
+        </div>
       )}
       renderTextResponse={({ onMessageSend, inputMode, active, appContext, mephistoContext }) => (
         <TextResponse
