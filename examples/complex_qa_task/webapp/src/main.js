@@ -49,6 +49,7 @@ function MainApp() {
   const [boolResponse, setBoolResponse] = React.useState(false);
   const [boolResponseProvideMoreQuestions, setBoolResponseProvideMoreQuestions] = React.useState(false);
   const [turnsRemaining, setTurnsRemaining] = React.useState(-1);
+  const [providedQuestions, setProvidedQuestions] = React.useState([]);
 
   return (
     <ChatApp
@@ -86,6 +87,9 @@ function MainApp() {
       onMessagesChange={(messages) => {
         if (messages && messages.length > 0) {
           const message = messages[messages.length - 1]
+          if ('text' in message && message.text.trim().length > 0) {
+            setProvidedQuestions(providedQuestions.concat(message.text.trim()))
+          }
           if ('requires_bool_input' in message) {
             if (message.requires_bool_input) {
               setBoolResponse(true);
