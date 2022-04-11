@@ -300,6 +300,9 @@ class ParlAIChatBlueprint(OnboardingRequired, Blueprint):
                 "preview_html": self.full_preview_description,
                 "frame_height": 650,
                 "chat_title": self.args.task.task_title,
+                "task_reward_base": self.args.task.task_reward,
+                "task_reward_question": self.args.task.task_reward_question,
+                "task_reward_bool": self.args.task.task_reward_bool,
                 "has_preview": self.args.blueprint.get("preview_source", None)
                 is not None,
                 "block_mobile": True,
