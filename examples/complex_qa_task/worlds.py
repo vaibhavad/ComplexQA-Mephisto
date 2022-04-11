@@ -71,7 +71,12 @@ class MultiAgentDialogWorld(CrowdTaskWorld):
     def parley(self):
         conv = self.dataloader.act()
         self.max_turns = len(conv)
-        for i, turn in enumerate(conv):
+
+        # Display two conversation turns at the start of interaction.
+        self.current_turns += 1
+        self.agent.observe(self.get_message(conv[0], self.max_turns - 1, requires_bool=True))
+
+        for i, turn in enumerate(conv[1:], start=2):
             self.current_turns += 1
             try:
                 self.agent.observe(self.get_message(turn, self.max_turns - i, requires_bool=True))
