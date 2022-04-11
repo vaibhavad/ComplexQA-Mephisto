@@ -8,7 +8,7 @@ function ProvidedQuestions({ providedQuestions }) {
             <div>
                 <h3>Provided Questions: </h3>
                 {providedQuestions.map((question, index) => (
-                    <div>
+                    <div key={index}>
                         <p><b>{question}</b></p>
                     </div>
                 ))}
