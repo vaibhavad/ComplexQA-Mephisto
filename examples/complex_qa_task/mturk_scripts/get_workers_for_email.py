@@ -17,6 +17,6 @@ client = boto3.client('mturk',
 
 workers = get_mailable_workers(client)
 
-with open('workers.txt', 'w') as f:
+with open('workers-temp.txt', 'w') as f:
     for worker in workers:
         f.write(worker + '\n')
