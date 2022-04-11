@@ -778,3 +778,15 @@ def get_qualification_scores(
     for score in all_scores:
         scores.append((score['WorkerId'], score['IntegerValue']))
     return scores
+
+def get_workers_with_qualification(
+        client: MTurkClient,
+        qual_id: str,
+        min_score: int) -> List[str]:
+    """Returns a list of worker ids qualified with the specific qualification"""
+    scores = get_qualification_scores(client=client, qual_id=qual_id)
+    workers = []
+    for score in scores:
+        if score[1] >= min_score:
+            workers.append(score[0])
+    return workers
