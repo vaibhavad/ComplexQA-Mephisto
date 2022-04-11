@@ -84,6 +84,9 @@ function MainApp() {
           active={inputMode === INPUT_MODE.READY_FOR_INPUT || inputMode === INPUT_MODE.READY_FOR_BOOL_INPUT}
           boolResponse={boolResponse}
           boolResponseProvideMoreQuestions={boolResponseProvideMoreQuestions}
+          amountEarned={amountEarned}
+          setAmountEarned={setAmountEarned}
+          taskConfig={mephistoContext.taskConfig}
         />
       )}
       onMessagesChange={(messages) => {
