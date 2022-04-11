@@ -762,3 +762,19 @@ def get_workers_from_hits(
 def get_mailable_workers(client: MTurkClient) -> Set[str]:
     all_hits = get_hits(client)
     return set(get_workers_from_hits(client=client, hits=all_hits))
+
+def get_qualification_scores(
+        client: MTurkClient,
+        qual_id: str) -> List[Tuple[str, int]]:
+    """Returns a list of tuples with qualification scores of a specific qualification"""
+    qual_response = client.list_workers_with_qualification_type(
+        QualificationTypeId=qual_id, MaxResults=100)
+    all_scores = qual_response['Qualifications']
+    while len(qual_response['Qualifications']) > 0:
+        qual_response = client.list_workers_with_qualification_type(
+            QualificationTypeId=qual_id, MaxResults=100, NextToken=qual_response["NextToken"])
+        all_scores += qual_response['Qualifications']
+    scores = []
+    for score in all_scores:
+        scores.append((score['WorkerId'], score['IntegerValue']))
+    return scores
