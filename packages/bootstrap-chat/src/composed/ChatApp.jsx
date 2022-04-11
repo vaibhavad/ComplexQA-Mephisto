@@ -172,6 +172,7 @@ function ChatApp({
     if (agentId) {
       console.log("connecting...");
       connect(agentId);
+      setAmountEarned(taskConfig.task_reward_base);
     }
   }, [agentId]);
 
