@@ -32,6 +32,10 @@ class DataLoaderConfig:
         default="",
         metadata={"help": ""}
     )
+    num_turns: int = field(
+        default=10,
+        metadata={"help": ""}
+    )
 
 
 @dataclass

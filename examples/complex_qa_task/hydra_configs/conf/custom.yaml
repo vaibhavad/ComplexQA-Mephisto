@@ -17,3 +17,4 @@ dataloader:
   module_name: mephisto.operations.data_loader
   class_name: TopiOCQAQADataLoader
   datapath: /Users/vaibhav.adlakha/Desktop/topiocqa/topiocqa_train.json
+  num_turns: 10
