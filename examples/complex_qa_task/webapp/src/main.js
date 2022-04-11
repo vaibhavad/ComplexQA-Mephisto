@@ -72,7 +72,14 @@ function MainApp() {
             taskDescriptionHtml={"<div></div>"}
           >
             <p>
-              task description will appear here.
+                In this task, you will create <b>COMPLEX</b> by combining questions from a quiz-like <b>CONVERSATION</b>.
+                Remember two rules of thumb:
+                <ul>
+                    <li><b>COMPLEX</b> questions are questions which require you to answer two or more sub-questions in order to answer the overall question.</li>
+					<li>Your <b>COMPLEX</b> questions must have the same answer as the latest question/answer pair in the <b>CONVERSATION</b>.</li>
+                </ul>
+				For a complete description of this task, refer to the <a href="https://shorturl.at/ejsO6">instructions</a>.
+
             </p>
           </DefaultTaskDescription>
           <ProvidedQuestions providedQuestions={providedQuestions} />
