@@ -112,6 +112,20 @@ class TaskRunArgs:
             )
         },
     )
+    task_reward_question: float = field(
+        default=MISSING,
+        metadata={
+            "help": "Amount to pay per worker per unit for each question, in dollars.",
+            "required": True,
+        },
+    )
+    task_reward_bool: float = field(
+        default=MISSING,
+        metadata={
+            "help": "Amount to pay per worker per unit for each boolean response, in dollars.",
+            "required": True,
+        },
+    )
 
     @classmethod
     def get_mock_params(cls) -> str:

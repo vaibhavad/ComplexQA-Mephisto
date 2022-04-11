@@ -36,6 +36,8 @@ function ChatApp({
   onMessagesChange,
   defaultAppSettings = emptyAppSettings,
   turnsRemaining,
+  setAmountEarned,
+  amountEarned,
 }) {
   const [taskContext, updateContext] = React.useReducer(
     (oldContext, newContext) => {
@@ -170,6 +172,7 @@ function ChatApp({
     if (agentId) {
       console.log("connecting...");
       connect(agentId);
+      setAmountEarned(taskConfig.task_reward_base);
     }
   }, [agentId]);
 
@@ -242,6 +245,7 @@ function ChatApp({
             renderTextResponse={renderTextResponse}
             renderResponse={renderResponse}
             turnsRemaining={turnsRemaining}
+            amountEarned={amountEarned}
           />
         </div>
       </AppContext.Provider>

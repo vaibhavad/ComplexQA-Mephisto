@@ -29,6 +29,7 @@ function BaseFrontend({
   renderTextResponse,
   renderResponse,
   turnsRemaining,
+  amountEarned,
 }) {
   const mephistoContext = React.useContext(MephistoContext);
   const appContext = React.useContext(AppContext);
@@ -47,7 +48,7 @@ function BaseFrontend({
         </div>
         <div className="chat-container-pane">
           <div className="right-top-pane">
-            <ChatStatusBar turnsRemaining={turnsRemaining} />
+            <ChatStatusBar turnsRemaining={turnsRemaining} amountEarned={amountEarned} />
             <ChatPane scrollBottomKey={messages.length + "-" + inputMode}>
               <div id="message_thread" style={{ width: "100%" }}>
                 {messages.map((message, idx) =>
@@ -88,13 +89,14 @@ function getWaitingMessage(agentStatus) {
     : "Waiting for the next person to speak...";
 }
 
-function ChatStatusBar({ turnsRemaining }) {
+function ChatStatusBar({ turnsRemaining, amountEarned }) {
   const { connectionStatus } = React.useContext(MephistoContext);
   const { appSettings, setAppSettings } = React.useContext(AppContext);
 
   return (
     <div className="chat-status-bar">
-      <div className="col-xs-5 chat-status-turns-remaining"><b>{parseInt(turnsRemaining)} turns remaining </b></div>
+      <div className="col-xs-3 chat-status-turns-remaining"><b>{parseInt(turnsRemaining)} turns remaining </b></div>
+      <div className="col-xs-3 chat-status-turns-remaining" style={{ textAlign: "right" }}><b>Amount earned: {parseFloat(amountEarned)} </b></div>
       <ConnectionIndicator connectionStatus={connectionStatus} />
       <VolumeControl
         volume={appSettings.volume}

@@ -13,7 +13,7 @@ const BOOL_MESSAGE = "It it possible to form complex question from the most rece
 const BOOL_MORE_QUESTIONS_MESSAGE = "It is possible to form another complex question?"
 const TEXT_INPUT_MESSAGE = "Please provide the complex question below"
 
-function TextResponse({ onMessageSend, active, boolResponse, boolResponseProvideMoreQuestions }) {
+function TextResponse({ onMessageSend, active, boolResponse, boolResponseProvideMoreQuestions, amountEarned, setAmountEarned, taskConfig}) {
 
   const [textValue, setTextValue] = React.useState("");
   const [sending, setSending] = React.useState(false);
@@ -32,6 +32,7 @@ function TextResponse({ onMessageSend, active, boolResponse, boolResponseProvide
       onMessageSend({ text: textValue, task_data: {} }).then(() => {
         setTextValue("");
         setSending(false);
+        setAmountEarned(amountEarned + taskConfig.task_reward_question);
       });
     }
   }, [textValue, active, sending, onMessageSend]);
@@ -41,6 +42,7 @@ function TextResponse({ onMessageSend, active, boolResponse, boolResponseProvide
       setSending(true);
       onMessageSend({ boolValue: boolValue, task_data: {} }).then(() => {
         setSending(false);
+        setAmountEarned(amountEarned + taskConfig.task_reward_bool);
       });
     }
   }, [active, sending, onMessageSend]);
