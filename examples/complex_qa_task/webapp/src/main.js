@@ -25,19 +25,19 @@ function RenderChatMessage({ message, mephistoContext, appContext, idx }) {
     var messageText = message.text;
     if ('question' in message && 'answer' in message) {
       messageText = message
-    return (
-      <ChatMessage
-        isSelf={message.id === agentId || message.id in currentAgentNames}
-        agentName={
-          message.id in currentAgentNames
-            ? currentAgentNames[message.id]
-            : message.id
-        }
-        message={messageText}
-        taskData={message.task_data}
-        messageId={message.update_id}
-      />
-    );
+      return (
+        <ChatMessage
+          isSelf={message.id === agentId || message.id in currentAgentNames}
+          agentName={
+            message.id in currentAgentNames
+              ? currentAgentNames[message.id]
+              : message.id
+          }
+          message={messageText}
+          taskData={message.task_data}
+          messageId={message.update_id}
+        />
+      );
     }
   }
   return null;
@@ -52,7 +52,7 @@ function MainApp() {
 
   return (
     <ChatApp
-    turnsRemaining={turnsRemaining}
+      turnsRemaining={turnsRemaining}
       renderMessage={({ message, idx, mephistoContext, appContext }) => (
         <RenderChatMessage
           message={message}
@@ -64,14 +64,14 @@ function MainApp() {
       )}
       renderSidePane={({ mephistoContext: { taskConfig } }) => (
         <div>
-        <DefaultTaskDescription
-          chatTitle={taskConfig.chat_title}
+          <DefaultTaskDescription
+            chatTitle={taskConfig.chat_title}
             taskDescriptionHtml={"<div></div>"}
-        >
-          <p>
+          >
+            <p>
               task description will appear here.
-          </p>
-        </DefaultTaskDescription>
+            </p>
+          </DefaultTaskDescription>
           <ProvidedQuestions providedQuestions={providedQuestions} />
         </div>
       )}
