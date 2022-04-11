@@ -36,6 +36,8 @@ function ChatApp({
   onMessagesChange,
   defaultAppSettings = emptyAppSettings,
   turnsRemaining,
+  setAmountEarned,
+  amountEarned,
 }) {
   const [taskContext, updateContext] = React.useReducer(
     (oldContext, newContext) => {
@@ -242,6 +244,7 @@ function ChatApp({
             renderTextResponse={renderTextResponse}
             renderResponse={renderResponse}
             turnsRemaining={turnsRemaining}
+            amountEarned={amountEarned}
           />
         </div>
       </AppContext.Provider>

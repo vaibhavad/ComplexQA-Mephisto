@@ -49,10 +49,13 @@ function MainApp() {
   const [boolResponseProvideMoreQuestions, setBoolResponseProvideMoreQuestions] = React.useState(false);
   const [turnsRemaining, setTurnsRemaining] = React.useState(-1);
   const [providedQuestions, setProvidedQuestions] = React.useState([]);
+  const [amountEarned, setAmountEarned] = React.useState(0.0);
 
   return (
     <ChatApp
       turnsRemaining={turnsRemaining}
+      setAmountEarned={setAmountEarned}
+      amountEarned={amountEarned}
       renderMessage={({ message, idx, mephistoContext, appContext }) => (
         <RenderChatMessage
           message={message}
