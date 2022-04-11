@@ -41,7 +41,7 @@ function BaseFrontend({
 
   return (
     <ConnectionStatusBoundary status={connectionStatus}>
-      <div className="row" style={heightStyle}>
+      <div className="row" style={{ height: "100vh", width: "100%"}}>
         <div className={"side-pane " + sidePaneSize}>
           {renderSidePane({ mephistoContext, appContext })}
         </div>
