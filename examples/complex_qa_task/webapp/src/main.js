@@ -25,8 +25,6 @@ function RenderChatMessage({ message, mephistoContext, appContext, idx }) {
     var messageText = message.text;
     if ('question' in message && 'answer' in message) {
       messageText = message
-    }
-
     return (
       <ChatMessage
         isSelf={message.id === agentId || message.id in currentAgentNames}
@@ -40,6 +38,7 @@ function RenderChatMessage({ message, mephistoContext, appContext, idx }) {
         messageId={message.update_id}
       />
     );
+    }
   }
   return null;
 }
