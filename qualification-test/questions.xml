@@ -2,7 +2,7 @@
 	xmlns='http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2005-10-01/QuestionForm.xsd'>
 	<Overview>
 		<Title>Complex Question Answering Qualification Test</Title>
-        <Text>Before completing our qualification test, please refer to our instructions: https://docs.google.com/document/d/1EbeRyG3rWLCY6P704oqsBtJ_xU7brGLHax79dOTY5TI/edit?usp=sharing</Text>
+        <Text>Before completing our qualification test, please refer to our instructions: https://shorturl.at/ejsO6</Text>
 	</Overview>
 	<Question>
 		<QuestionIdentifier>Q1</QuestionIdentifier>
@@ -126,7 +126,7 @@
 		<DisplayName>Q4</DisplayName>
 		<IsRequired>true</IsRequired>
 		<QuestionContent>
-			<Text>4. Given the dialogue provided below, select which question listed below is a COMPLEX question.</Text>
+            <Text>4. Given the dialogue provided below, select which question listed below is a COMPLEX question which has the same answer as the latest question/answer pair.</Text>
             <Binary>
 				<MimeType>
 				  <Type>image</Type>
@@ -165,7 +165,7 @@
 		<DisplayName>Q5</DisplayName>
 		<IsRequired>true</IsRequired>
 		<QuestionContent>
-			<Text>5. Given the dialogue provided below, select which question listed below is a COMPLEX question.</Text>
+            <Text>5. Given the dialogue provided below, select which question listed below is a COMPLEX question which has the same answer as the latest question/answer pair.</Text>
             <Binary>
 				<MimeType>
 				  <Type>image</Type>
@@ -181,11 +181,11 @@
 				<Selections>
 					<Selection>
 						<SelectionIdentifier>Q5_1</SelectionIdentifier>
-						<Text>Who is the brother of the actor who played Lee Chandler in the film Manchester by the Sea?</Text>
+						<Text>Who is the brother of the actor who played Lee Chandler in the film "Manchester by the Sea?"</Text>
 					</Selection>
 					<Selection>
 						<SelectionIdentifier>Q5_2</SelectionIdentifier>
-						<Text>Who were the parents of the actor who played Lee Chandler in the film Manchester by the Sea?</Text>
+						<Text>Who were the parents of the brother of the actor who played Lee Chandler in the film "Manchester by the Sea?"</Text>
 					</Selection>
 					<Selection>
 						<SelectionIdentifier>Q5_3</SelectionIdentifier>
@@ -193,7 +193,7 @@
 					</Selection>
 					<Selection>
 						<SelectionIdentifier>Q5_4</SelectionIdentifier>
-						<Text>Where was Casey Affleck who played Lee Chandler in the film Manchester by the Sea born?</Text>
+						<Text>Where was Casey Affleck who played Lee Chandler in the film "Manchester by the Sea" born?</Text>
 					</Selection>
 				</Selections>
 			</SelectionAnswer>
@@ -210,7 +210,7 @@
 				  <Type>image</Type>
 				  <SubType>png</SubType>
 				</MimeType>
-                <DataURL>https://drive.google.com/uc?export=view&amp;id=1fExuHVu7K0lJpEEQt_rjlgn9Dpfqjq6O</DataURL>
+                <DataURL>https://drive.google.com/uc?export=view&amp;id=1i8wF9qZkec-T8PGzHemRBNWJuPLRo5u7</DataURL>
 				<AltText>Conversation</AltText>
             </Binary>
 		</QuestionContent>
@@ -232,84 +232,6 @@
 					</Selection>
 					<Selection>
 						<SelectionIdentifier>Q6_4</SelectionIdentifier>
-						<Text> Question 4</Text>
-					</Selection>
-					<Selection>
-						<SelectionIdentifier>Q6_5</SelectionIdentifier>
-						<Text> Question 5</Text>
-					</Selection>
-				</Selections>
-			</SelectionAnswer>
-		</AnswerSpecification>
-	</Question>
-	<Question>
-		<QuestionIdentifier>Q7</QuestionIdentifier>
-		<DisplayName>Q7</DisplayName>
-		<IsRequired>true</IsRequired>
-		<QuestionContent>
-			<Text>7. Given the dialogue and COMPLEX question provided below, select the questions (Question 1, Question 2, Question 3, etc.) used to form the COMPLEX question.</Text>
-            <Binary>
-				<MimeType>
-				  <Type>image</Type>
-				  <SubType>png</SubType>
-				</MimeType>
-                <DataURL>https://drive.google.com/uc?export=view&amp;id=1EDjjEqaggNwsHaZygP1r9KA5m9SOlEve</DataURL>
-				<AltText>Conversation</AltText>
-            </Binary>
-		</QuestionContent>
-		<AnswerSpecification>
-			<SelectionAnswer>
-				<StyleSuggestion>checkbox</StyleSuggestion>
-				<Selections>
-					<Selection>
-						<SelectionIdentifier>Q7_1</SelectionIdentifier>
-						<Text> Question 1</Text>
-					</Selection>
-					<Selection>
-						<SelectionIdentifier>Q7_2</SelectionIdentifier>
-                        <Text> Question 2</Text>
-					</Selection>
-					<Selection>
-						<SelectionIdentifier>Q7_3</SelectionIdentifier>
-						<Text> Question 3</Text>
-					</Selection>
-				</Selections>
-			</SelectionAnswer>
-		</AnswerSpecification>
-	</Question>
-	<Question>
-		<QuestionIdentifier>Q8</QuestionIdentifier>
-		<DisplayName>Q8</DisplayName>
-		<IsRequired>true</IsRequired>
-		<QuestionContent>
-			<Text>8. Given the dialogue and COMPLEX question provided below, select the questions (Question 1, Question 2, Question 3, etc.) used to form the COMPLEX question.</Text>
-            <Binary>
-				<MimeType>
-				  <Type>image</Type>
-				  <SubType>png</SubType>
-				</MimeType>
-                <DataURL>https://drive.google.com/uc?export=view&amp;id=1i8wF9qZkec-T8PGzHemRBNWJuPLRo5u7</DataURL>
-				<AltText>Conversation</AltText>
-            </Binary>
-		</QuestionContent>
-		<AnswerSpecification>
-			<SelectionAnswer>
-				<StyleSuggestion>checkbox</StyleSuggestion>
-				<Selections>
-					<Selection>
-						<SelectionIdentifier>Q8_1</SelectionIdentifier>
-						<Text> Question 1</Text>
-					</Selection>
-					<Selection>
-						<SelectionIdentifier>Q8_2</SelectionIdentifier>
-                        <Text> Question 2</Text>
-					</Selection>
-					<Selection>
-						<SelectionIdentifier>Q8_3</SelectionIdentifier>
-						<Text> Question 3</Text>
-					</Selection>
-					<Selection>
-						<SelectionIdentifier>Q8_4</SelectionIdentifier>
 						<Text> Question 4</Text>
 					</Selection>
 				</Selections>
