@@ -75,6 +75,35 @@ def main(operator: "Operator", cfg: DictConfig) -> None:
         world_opt=world_opt, onboarding_world_opt=world_opt
     )
 
+    shared_state.mturk_specific_qualifications = [
+    {
+        "QualificationTypeId": "00000000000000000040",
+        "Comparator": "GreaterThanOrEqualTo",
+        "IntegerValues": [cfg.mephisto.task.minimum_hits_done],
+        "ActionsGuarded": "DiscoverPreviewAndAccept",
+    },
+    {
+        "QualificationTypeId": "000000000000000000L0",
+        "Comparator": "GreaterThanOrEqualTo",
+        "IntegerValues": [cfg.mephisto.task.minimum_acceptance_rate],
+        "ActionsGuarded": "DiscoverPreviewAndAccept",
+    }]
+
+    task_qualification_type_id = None
+    if cfg.mephisto.provider._provider_type == 'mturk':
+        task_qualification_type_id = cfg.mephisto.task.qualification
+    else:
+        task_qualification_type_id = cfg.mephisto.task.qualification_sandbox
+
+    if task_qualification_type_id is not None:
+        shared_state.mturk_specific_qualifications.append(
+        {
+            "QualificationTypeId": task_qualification_type_id,
+            "Comparator": "GreaterThanOrEqualTo",
+            "IntegerValues": [cfg.mephisto.task.minimum_qual_score],
+            "ActionsGuarded": "Accept",
+        })
+
     operator.launch_task_run(cfg.mephisto, shared_state)
     operator.wait_for_runs_then_shutdown(skip_input=True, log_rate=30)
 

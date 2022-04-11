@@ -13,6 +13,11 @@ mephisto:
     task_reward_question: 0.2
     task_reward_bool: 0.05
     task_tags: "question answering, chat, complex questions"
+    qualification_sandbox: 3QG4W3BIFAZMGUY838Z4EKY6FWDWNM
+    qualification: 3DA2M59FD03MKSVQ6KIPVI7Q8Y2RXF
+    minimum_qual_score: 80
+    minimum_hits_done: 500
+    minimum_acceptance_rate: 95
 dataloader:
   module_name: mephisto.operations.data_loader
   class_name: TopiOCQAQADataLoader
