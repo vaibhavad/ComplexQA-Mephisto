@@ -9,9 +9,9 @@ mephisto:
     task_title: "Complex QA Collection Task"
     task_description: >
       This is a task to collect complex questions from conversational questions.
-    task_reward: 0.1
-    task_reward_question: 0.5
-    task_reward_bool: 0.2
+    task_reward: 0.01
+    task_reward_question: 0.2
+    task_reward_bool: 0.05
     task_tags: "question answering, chat, complex questions"
 dataloader:
   module_name: mephisto.operations.data_loader
