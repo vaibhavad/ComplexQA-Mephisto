@@ -8,8 +8,9 @@ import boto3  # type: ignore
 import os
 import json
 import re
+import time
 from tqdm import tqdm  # type: ignore
-from typing import Dict, Optional, Tuple, List, Any
+from typing import Dict, Optional, Tuple, List, Set, Any, TYPE_CHECKING
 from datetime import datetime
 
 from botocore import client  # type: ignore
@@ -732,3 +733,32 @@ def expire_and_dispose_hits(
             h["dispose_exception"] = e
             non_disposed_hits.append(h)
     return non_disposed_hits
+
+
+def get_hits(client: MTurkClient) -> List[Dict[str, Any]]:
+    """Return all HITs that are still on the MTurk Server"""
+    new_hits = client.list_hits(MaxResults=100)
+    all_hits = new_hits["HITs"]
+    while len(new_hits["HITs"]) > 0:
+        new_hits = client.list_hits(
+            MaxResults=100, NextToken=new_hits["NextToken"])
+        all_hits += new_hits["HITs"]
+    return all_hits
+
+def get_workers_from_hits(
+        client: MTurkClient,
+        hits: List[Any]) -> List[str]:
+    """Returns a list of workers who have worked on HITs provided"""
+    workers = []
+    for hit in hits:
+        assignments = get_assignments_for_hit(
+            client=client, hit_id=hit["HITId"])
+        if client_is_sandbox(client=client):
+            time.sleep(0.5)
+        for assignment in assignments:
+            workers.append(assignment["WorkerId"])
+    return workers
+
+def get_mailable_workers(client: MTurkClient) -> Set[str]:
+    all_hits = get_hits(client)
+    return set(get_workers_from_hits(client=client, hits=all_hits))
