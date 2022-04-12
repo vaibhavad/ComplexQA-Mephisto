@@ -12,6 +12,7 @@ from mephisto.abstractions.providers.mturk.mturk_utils import (
     reject_work,
     get_assignment,
     get_assignments_for_hit,
+    pay_bonus,
 )
 
 import xmltodict  # type: ignore
@@ -117,6 +118,13 @@ class MTurkAgent(Agent):
         client = self._get_client()
         approve_work(client, self._get_mturk_assignment_id(), override_rejection=True)
         self.update_status(AgentState.STATUS_APPROVED)
+    
+    def pay_bonus(self, amount: float, reason: str, token: str) -> None:
+        """
+        Pay a bonus to the worker for this specific Unit
+        """
+        client = self._get_client()
+        pay_bonus(client, self.worker_id, amount, self._get_mturk_assignment_id(), reason, token)
 
     def reject_work(self, reason) -> None:
         """Reject the work done on this specific Unit"""
