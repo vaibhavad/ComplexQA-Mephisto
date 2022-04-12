@@ -18,8 +18,8 @@ client = boto3.client('mturk',
 with open('workers.txt', 'r') as f:
     workers = f.read().splitlines()
 
-subject = 'New task Anouncement: Complex Question Creation Task goes live tomorrow at 1 PM EST'
-text = open('email_texts/first_launch.txt', 'r').read()
+subject = "New Tasks in 1 Hours! - Complex Question Creation"
+text = open('email_texts/promotional.txt', 'r').read()
 
 for worker in workers:
     try:
