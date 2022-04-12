@@ -13,6 +13,49 @@ from mephisto.data_model.unit import Unit
 
 db = None
 
+QUAL_ID_SANDBOX = '3QG4W3BIFAZMGUY838Z4EKY6FWDWNM'
+QUAL_ID = '3DA2M59FD03MKSVQ6KIPVI7Q8Y2RXF'
+BONUS_AMOUNT = 1.0
+
+def calculate_qual_bonus(worker):
+    worker_name = worker.worker_name
+    if 'sandbox' in worker.provider_type:
+        qualification_id = QUAL_ID_SANDBOX
+    else:
+        qualification_id = QUAL_ID
+    
+    bonus_message = f"Hi {worker_name},\n\n You have received a bonus of ${BONUS_AMOUNT} for passing the qualification test {qualification_id} and submitting a HIT. \
+        Thank you for participating in our tasks! \
+            \n\nBest,\nQA Research"
+    return BONUS_AMOUNT, bonus_message, f"{worker_name}_{qualification_id}"
+
+def calculate_task_bonus_from_data(data):
+    global db
+
+    worker_name = Worker.get(db, data["worker_id"]).worker_name
+    unit = Unit.get(db, data["unit_id"])
+    assignment_id = unit.get_mturk_assignment_id()
+
+    bool_message_amount = 0.05
+    text_message_amount = 0.2
+
+    messages = [message for message in data["data"]["messages"] if "id" in message]
+    num_bool_messages = 0
+    num_text_messages = 0
+    for message in messages:
+        if message["id"] == 'Chat Agent' and "boolValue" in message:
+            num_bool_messages += 1
+        elif message["id"] == 'Chat Agent' and "text" in message:
+            num_text_messages += 1
+        else:
+            continue
+    
+    total_bonus_amount = num_bool_messages * bool_message_amount + num_text_messages * text_message_amount
+    total_bonus_amount = round(total_bonus_amount, 5)
+    bonus_message = f"Hi {worker_name},\n\n You have received a bonus of ${total_bonus_amount} for completing assignment {assignment_id}. \
+        In this assignment you provided {num_bool_messages} yes/no answers and {num_text_messages} complex questions. Thank you for participating in our tasks! \
+            \n\nBest,\nQA Research"
+    return total_bonus_amount, bonus_message
 
 def format_for_printing_data(data):
     global db
@@ -38,7 +81,8 @@ def format_for_printing_data(data):
 def main():
     global db
     db = LocalMephistoDB()
-    run_examine_or_review(db, format_for_printing_data)
+    run_examine_or_review(db, format_for_printing_data, \
+        calculate_task_bonus_from_data, calculate_qual_bonus)
 
 
 if __name__ == "__main__":
