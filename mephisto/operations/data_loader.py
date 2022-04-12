@@ -9,6 +9,7 @@ class TopiOCQAQADataLoader():
         with open (opt.datapath) as f:
             self.data = json.load(f)
         self.num_of_convs = self.data[-1]["Conversation_no"]
+        self.num_turns = opt.num_turns
 
     def act(self):
         idx = random.randrange(1, self.num_of_convs)
@@ -16,7 +17,7 @@ class TopiOCQAQADataLoader():
         for turn in self.data:
             if turn["Conversation_no"] == idx:
                 data.append(turn)
-        return data
+        return data[:self.num_turns]
 
     def get(self, conv_id=1, turn_id=1):
         for turn in self.data:

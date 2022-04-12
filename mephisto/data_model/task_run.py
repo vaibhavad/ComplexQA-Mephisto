@@ -126,6 +126,36 @@ class TaskRunArgs:
             "required": True,
         },
     )
+    qualification: Optional[str] = field(
+        default=None,
+        metadata={
+            "help": "Task Qualification (mturk)"
+        },
+    )
+    qualification_sandbox: Optional[str] = field(
+        default=None,
+        metadata={
+            "help": "Task Qualification (mturk sandbox)"
+        },
+    )
+    minimum_qual_score: Optional[int] = field(
+        default=0,
+        metadata={
+            "help": "Minimum qualification test score that the worker should have achieved"
+        }
+    )
+    minimum_hits_done: Optional[int] = field(
+        default=0,
+        metadata={
+            "help": "Minimum number of HITs that the worker should have completed"
+        }
+    )
+    minimum_acceptance_rate: Optional[int] = field(
+        default=95,
+        metadata={
+            "help": "Minimum HIT acceptance rate that the worker should have achieved"
+        }
+    )
 
     @classmethod
     def get_mock_params(cls) -> str:

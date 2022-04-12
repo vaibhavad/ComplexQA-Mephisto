@@ -86,6 +86,8 @@ class MultiAgentDialogWorld(CrowdTaskWorld):
                 if 'boolValue' in self.act and self.act["boolValue"]:
                     self.agent.observe(self.get_message())
                     self.act = self.agent.act(timeout=self.opt["turn_timeout"])
+                    if "text" in self.act and len(self.act["text"].strip()) > 0:
+                        print(f"COMPLEX QUESTION - {self.act['text']}")
 
                     provide_more_questions = True
                     while provide_more_questions:
@@ -95,6 +97,8 @@ class MultiAgentDialogWorld(CrowdTaskWorld):
                         if provide_more_questions:
                             self.agent.observe(self.get_message())
                             self.act = self.agent.act(timeout=self.opt["turn_timeout"])
+                            if "text" in self.act and len(self.act["text"].strip()) > 0:
+                                print(f"COMPLEX QUESTION - {self.act['text']}")
 
                 if self.send_task_data:
                     self.act.force_set(
