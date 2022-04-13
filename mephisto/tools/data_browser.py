@@ -28,7 +28,7 @@ class DataBrowser:
             db = LocalMephistoDB()
         self.db = db
 
-    def _get_units_for_task_runs(self, task_runs: List[TaskRun]) -> List[Unit]:
+    def _get_units_for_task_runs(self, task_runs: List[TaskRun], return_incomplete: Optional[bool]=False ) -> List[Unit]:
         """
         Return a list of all Units in a terminal completed state from all
         the provided TaskRuns.
@@ -45,13 +45,16 @@ class DataBrowser:
                         AssignmentState.REJECTED,
                         AssignmentState.SOFT_REJECTED,
                     ]:
+                        if not return_incomplete:
+                            units.append(unit)
+                    elif return_incomplete:
                         units.append(unit)
         return units
 
     def get_task_name_list(self) -> List[str]:
         return [task.task_name for task in self.db.find_tasks()]
 
-    def get_units_for_task_name(self, task_name: str) -> List[Unit]:
+    def get_units_for_task_name(self, task_name: str, return_incomplete: Optional[bool]=False) -> List[Unit]:
         """
         Return a list of all Units in a terminal completed state from all
         task runs with the given task_name
@@ -59,7 +62,7 @@ class DataBrowser:
         tasks = self.db.find_tasks(task_name=task_name)
         assert len(tasks) >= 1, f"No task found under name {task_name}"
         task_runs = self.db.find_task_runs(task_id=tasks[0].db_id)
-        return self._get_units_for_task_runs(task_runs)
+        return self._get_units_for_task_runs(task_runs, return_incomplete)
 
     def get_units_for_run_id(self, run_id: str) -> List[Unit]:
         """
