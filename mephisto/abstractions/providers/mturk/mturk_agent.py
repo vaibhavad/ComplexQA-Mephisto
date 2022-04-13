@@ -5,6 +5,7 @@
 # LICENSE file in the root directory of this source tree.
 
 from mephisto.data_model.agent import Agent
+from mephisto.data_model.worker import Worker
 from mephisto.abstractions.blueprint import AgentState
 from mephisto.abstractions.providers.mturk.provider_type import PROVIDER_TYPE
 from mephisto.abstractions.providers.mturk.mturk_utils import (
@@ -124,7 +125,7 @@ class MTurkAgent(Agent):
         Pay a bonus to the worker for this specific Unit
         """
         client = self._get_client()
-        pay_bonus(client, self.worker_id, amount, self._get_mturk_assignment_id(), reason, token)
+        pay_bonus(client, Worker.get(self.db, self.worker_id).worker_name, amount, self._get_mturk_assignment_id(), reason, token)
 
     def reject_work(self, reason) -> None:
         """Reject the work done on this specific Unit"""
