@@ -434,24 +434,24 @@ def create_hit_type(
                 has_locale_qual = True
         locale_requirements += existing_qualifications
 
-    if not has_locale_qual and not client_is_sandbox(client):
-        allowed_locales = get_config_arg("mturk", "allowed_locales")
-        if allowed_locales is None:
-            allowed_locales = [
-                {"Country": "US"},
-                {"Country": "CA"},
-                {"Country": "GB"},
-                {"Country": "AU"},
-                {"Country": "NZ"},
-            ]
-        locale_requirements.append(
-            {
-                "QualificationTypeId": MTURK_LOCALE_REQUIREMENT,
-                "Comparator": "In",
-                "LocaleValues": allowed_locales,
-                "ActionsGuarded": "DiscoverPreviewAndAccept",
-            }
-        )
+    # if not has_locale_qual and not client_is_sandbox(client):
+    #     allowed_locales = get_config_arg("mturk", "allowed_locales")
+    #     if allowed_locales is None:
+    #         allowed_locales = [
+    #             {"Country": "US"},
+    #             {"Country": "CA"},
+    #             {"Country": "GB"},
+    #             {"Country": "AU"},
+    #             {"Country": "NZ"},
+    #         ]
+    #     locale_requirements.append(
+    #         {
+    #             "QualificationTypeId": MTURK_LOCALE_REQUIREMENT,
+    #             "Comparator": "In",
+    #             "LocaleValues": allowed_locales,
+    #             "ActionsGuarded": "DiscoverPreviewAndAccept",
+    #         }
+    #     )
 
     # Create the HIT type
     response = client.create_hit_type(
