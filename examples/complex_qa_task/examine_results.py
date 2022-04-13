@@ -24,9 +24,7 @@ def calculate_qual_bonus(worker):
     else:
         qualification_id = QUAL_ID
     
-    bonus_message = f"Hi {worker_name},\n\n You have received a bonus of ${BONUS_AMOUNT} for passing the qualification test {qualification_id} and submitting a HIT. \
-        Thank you for participating in our tasks! \
-            \n\nBest,\nQA Research"
+    bonus_message = f"Hi {worker_name},\n\nYou have received a bonus of ${BONUS_AMOUNT} for passing the qualification test {qualification_id} and submitting a HIT. Thank you for participating in our tasks!\\n\nBest,\nQA Research"
     return BONUS_AMOUNT, bonus_message, f"{worker_name}_{qualification_id}"
 
 def calculate_task_bonus_from_data(data):
@@ -52,9 +50,7 @@ def calculate_task_bonus_from_data(data):
     
     total_bonus_amount = num_bool_messages * bool_message_amount + num_text_messages * text_message_amount
     total_bonus_amount = round(total_bonus_amount, 5)
-    bonus_message = f"Hi {worker_name},\n\n You have received a bonus of ${total_bonus_amount} for completing assignment {assignment_id}. \
-        In this assignment you provided {num_bool_messages} yes/no answers and {num_text_messages} complex questions. Thank you for participating in our tasks! \
-            \n\nBest,\nQA Research"
+    bonus_message = f"Hi {worker_name},\n\nYou have received a bonus of ${total_bonus_amount} for completing assignment {assignment_id}. In this assignment you provided {num_bool_messages} yes/no answers and {num_text_messages} complex questions. Thank you for participating in our tasks! \n\nBest,\nQA Research"
     return total_bonus_amount, bonus_message
 
 def format_for_printing_data(data):
