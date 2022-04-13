@@ -671,14 +671,24 @@ def pay_bonus(
     if not check_mturk_balance(client, balance_needed=total_cost):
         print("Cannot pay bonus. Reason: Insufficient " "funds in your MTurk account.")
         return False
+    if '_sandbox' in worker_id:
+        worker_id = worker_id.replace('_sandbox', '')
+    try:
+        client.send_bonus(
+            WorkerId=worker_id,
+            BonusAmount=str(bonus_amount),
+            AssignmentId=assignment_id,
+            Reason=reason,
+            UniqueRequestToken=unique_request_token,
+        )
+    except ClientError as e:
+        if e.response['Error']['Code'] == 'RequestError' \
+                and f'{unique_request_token}' in e.response['Error']['Message']:
+            print(f'Bonus already paid to {worker_id}')
+        else:
+            print("An error occured while trying to pay bonus")
+            raise e
 
-    client.send_bonus(
-        WorkerId=worker_id,
-        BonusAmount=str(bonus_amount),
-        AssignmentId=assignment_id,
-        Reason=reason,
-        UniqueRequestToken=unique_request_token,
-    )
 
     return True
 
