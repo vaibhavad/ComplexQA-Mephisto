@@ -214,7 +214,7 @@ def run_examine_by_worker(
         if calculate_qual_bonus is not None:
             qual_bonus, qual_bonus_reason, qual_bonus_token = calculate_qual_bonus(worker)
             agent = w_units[0].get_assigned_agent()
-            print(f"Trying to pay qualification bonus of {qual_bonus} to {worker.worker_name}")
+            print(f"\n\nTrying to pay qualification bonus of {qual_bonus} to {worker.worker_name}")
             agent.pay_bonus(qual_bonus, qual_bonus_reason, qual_bonus_token)
         worker_name = worker.worker_name
         apply_all_decision = None
