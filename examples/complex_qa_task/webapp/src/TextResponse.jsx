@@ -12,11 +12,14 @@ import { FormControl, Button } from "react-bootstrap";
 const BOOL_MESSAGE = "It it possible to form complex question from the most recent QA pair?"
 const BOOL_MORE_QUESTIONS_MESSAGE = "It is possible to form another complex question?"
 const TEXT_INPUT_MESSAGE = "Please provide the complex question below"
+const MAX_QUESTIONS_PER_TURN = 3
+const MOVE_TO_NEXT_TURN_MESSAGE = "Only " + MAX_QUESTIONS_PER_TURN + " complex questions allowed per turn. Please move to the next turn."
 
 function TextResponse({ onMessageSend, active, boolResponse, boolResponseProvideMoreQuestions, amountEarned, setAmountEarned, taskConfig}) {
 
   const [textValue, setTextValue] = React.useState("");
   const [sending, setSending] = React.useState(false);
+  const [numComplexPerTurn, setNumComplexPerTurn] = React.useState(0);
 
   const inputRef = React.useRef();
 
@@ -33,6 +36,7 @@ function TextResponse({ onMessageSend, active, boolResponse, boolResponseProvide
         setTextValue("");
         setSending(false);
         setAmountEarned(amountEarned + taskConfig.task_reward_question);
+        setNumComplexPerTurn(numComplexPerTurn + 1);
       });
     }
   }, [textValue, active, sending, onMessageSend]);
@@ -48,6 +52,9 @@ function TextResponse({ onMessageSend, active, boolResponse, boolResponseProvide
   }, [active, sending, onMessageSend]);
 
   const tryBoolMessageProvideMoreQuestions = React.useCallback((boolValue) => {
+    if (!boolValue){
+      setNumComplexPerTurn(0);
+    }
     if (active && !sending) {
       setSending(true);
       onMessageSend({ boolValueProvideMoreQuestions: boolValue, task_data: {} }).then(() => {
@@ -94,15 +101,15 @@ function TextResponse({ onMessageSend, active, boolResponse, boolResponseProvide
     return (
       <div className="response-type-module">
         <div className="response-type-module-instruction">
-          <p><b>{BOOL_MORE_QUESTIONS_MESSAGE}</b></p>
+          <p><b>{numComplexPerTurn < MAX_QUESTIONS_PER_TURN ? BOOL_MORE_QUESTIONS_MESSAGE : MOVE_TO_NEXT_TURN_MESSAGE}</b></p>
         </div>
         <div className="response-bar">
-          <Button
+          {numComplexPerTurn < MAX_QUESTIONS_PER_TURN ? <Button
             className="btn btn-primary btn-bool"
             disabled={!active || sending}
             onClick={() => tryBoolMessageProvideMoreQuestions(true)}
           ><span className="glyphicon" aria-hidden="true" /> Provide another question
-          </Button>
+          </Button> : null}
           <Button
             className="btn btn-primary btn-bool"
             disabled={!active || sending}
