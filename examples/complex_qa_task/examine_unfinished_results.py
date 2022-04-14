@@ -14,7 +14,7 @@ db = None
 
 QUAL_ID_SANDBOX = '3QG4W3BIFAZMGUY838Z4EKY6FWDWNM'
 QUAL_ID = '3DA2M59FD03MKSVQ6KIPVI7Q8Y2RXF'
-BONUS_AMOUNT = 1.0
+BASE_AMOUNT = 0.01
 
 
 def calculate_task_bonus_from_data(data):
@@ -39,9 +39,7 @@ def calculate_task_bonus_from_data(data):
             continue
     
     total_bonus_amount = num_bool_messages * bool_message_amount + num_text_messages * text_message_amount
-    total_bonus_amount = round(total_bonus_amount, 5)
-    bonus_message = f"Hi {worker_name},\n\nYou have received a bonus of ${total_bonus_amount} for completing assignment {assignment_id}. In this assignment you provided {num_bool_messages} yes/no answers and {num_text_messages} complex questions. Thank you for participating in our tasks! \n\nBest,\nQA Research"
-    return total_bonus_amount, bonus_message
+    return total_bonus_amount, num_bool_messages, num_text_messages
 
 
 def format_for_printing_data(data):
@@ -80,6 +78,8 @@ def examine_unfinished_results():
 
     units = data_browser.get_units_for_task_name(task_name, return_incomplete=True)
 
+    worker_payment_dict = {}
+
     for unit in units:
         assignment = unit.get_assignment()
         assignment_dir = unit.get_assignment().get_data_dir()
@@ -109,22 +109,26 @@ def examine_unfinished_results():
 
             try:
                 formatted = format_for_printing_data(data)
-                print(formatted + '\n\n')
-                print("Worker name: " + worker.worker_name)
-                print("task amount (Bonus + base pay): " + str(calculate_task_bonus_from_data(data)[0] + 0.01))
+                if len(formatted) > 0:
+                    print(formatted)
+                bonus_amount, num_bool_messages, num_text_messages = calculate_task_bonus_from_data(data)
+                bonus_amount = bonus_amount + BASE_AMOUNT
+                if worker.worker_name not in worker_payment_dict:
+                    worker_payment_dict[worker.worker_name] = {"amount": 0.0, "num_bool_messages": 0, "num_text_messages": 0, "num_tasks": 0}
+                worker_payment_dict[worker.worker_name]["amount"] += bonus_amount
+                worker_payment_dict[worker.worker_name]["num_bool_messages"] += num_bool_messages
+                worker_payment_dict[worker.worker_name]["num_text_messages"] += num_text_messages
+                worker_payment_dict[worker.worker_name]["num_tasks"] += 1
 
             except Exception as e:
                 print(f"Unexpected error formatting data for {unit}: {e}")
                 # Print the full exception, as this could be user error on the
                 # formatting function
                 traceback.print_exc()
-
-            
-
-
-
-
-
+    
+    for worker_name, payment_dict in worker_payment_dict.items():
+        print(f"{worker_name}:\nAmount: {round(payment_dict['amount'],5)}\n"
+            f"Reason: According to our records, you worked on {payment_dict['num_tasks']} tasks, contributed {payment_dict['num_bool_messages']} yes/no answers and {payment_dict['num_text_messages']} complex questions.\n\n")
 
 
 def main():
