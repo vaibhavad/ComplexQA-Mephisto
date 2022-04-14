@@ -56,13 +56,17 @@ def format_for_printing_data(data):
 
     messages = [message for message in data["data"]["messages"] if "id" in message]
     output_string = ''
+    complex_questions = 0
     for message in messages:
         if message["id"] == 'System' and 'question' in message and 'answer' in message:
             output_string += f"\nQuestion: {message['question']}\nAnswer: {message['answer']}\n"
         elif message["id"] == 'Chat Agent' and "text" in message:
+            complex_questions += 1
             output_string += f"Complex Question: {message['text']}\n"
-
-    return f"-------------------\n{metadata_string}{output_string}"
+    if complex_questions > 0:
+        return f"-------------------\n{metadata_string}{output_string}"
+    else:
+        return ""
 
 
 def examine_unfinished_results():
