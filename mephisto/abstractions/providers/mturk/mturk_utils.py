@@ -607,11 +607,14 @@ def approve_work(
         client.approve_assignment(
             AssignmentId=assignment_id, OverrideRejection=override_rejection
         )
-    except Exception as e:
-        logger.exception(
-            f"Approving MTurk assignment failed, likely because it has auto-approved. Details: {e}",
-            exc_info=True,
-        )
+    except ClientError as e:
+        if e.response["Error"]["Code"] == "RequestError":
+            logger.exception(
+                f"Approving MTurk assignment failed, likely because it has auto-approved.",
+                exc_info=True,
+            )
+        else:
+            raise e
 
 
 def reject_work(client: MTurkClient, assignment_id: str, reason: str) -> None:
