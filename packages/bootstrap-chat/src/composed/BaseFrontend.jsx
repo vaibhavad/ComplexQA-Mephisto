@@ -86,7 +86,7 @@ function BaseFrontend({
 function getWaitingMessage(agentStatus) {
   return agentStatus === "waiting"
     ? "Waiting to pair with a task..."
-    : "Waiting for the next person to speak...";
+    : "Waiting for response from the server...";
 }
 
 function ChatStatusBar({ turnsRemaining, amountEarned }) {
