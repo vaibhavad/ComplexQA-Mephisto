@@ -681,10 +681,11 @@ def pay_bonus(
             Reason=reason,
             UniqueRequestToken=unique_request_token,
         )
+        print(f"Paid {bonus_amount} to {worker_id}")
     except ClientError as e:
         if e.response['Error']['Code'] == 'RequestError' \
                 and f'{unique_request_token}' in e.response['Error']['Message']:
-            print(f'Bonus already paid to {worker_id}')
+            print(f'{bonus_amount} Bonus already paid to {worker_id}, using token {unique_request_token}')
         else:
             print("An error occured while trying to pay bonus")
             raise e
