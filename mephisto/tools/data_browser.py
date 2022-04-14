@@ -39,15 +39,14 @@ class DataBrowser:
             for assignment in assignments:
                 found_units = assignment.get_units()
                 for unit in found_units:
-                    if unit.get_status() in [
+                    if return_incomplete:
+                        units.append(unit)
+                    elif unit.get_status() in [
                         AssignmentState.COMPLETED,
                         AssignmentState.ACCEPTED,
                         AssignmentState.REJECTED,
                         AssignmentState.SOFT_REJECTED,
                     ]:
-                        if not return_incomplete:
-                            units.append(unit)
-                    elif return_incomplete:
                         units.append(unit)
         return units
 

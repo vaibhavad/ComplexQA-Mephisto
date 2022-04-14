@@ -82,7 +82,9 @@ def examine_unfinished_results():
 
         data_files = glob(assignment_dir + "/**/state.json", recursive=True)
         for data_file in data_files:
-            agent_id = int(data_file.split('/')[-2])
+            agent_id = data_file.split('/')[-2]
+            if unit.agent_id is not None and unit.agent_id == agent_id:
+                continue
             agent = Agent.get(db, agent_id)
             worker = agent.get_worker()
 
