@@ -14,6 +14,7 @@ import { ChatApp, INPUT_MODE } from "../../../../packages/bootstrap-chat";
 import { TextResponse } from "./TextResponse.jsx"
 import { ProvidedQuestions } from "./ProvidedQuestions.jsx"
 import { DefaultTaskDescription } from "./DefaultTaskDescription.jsx"
+import { SameAnswerModal } from "./SameAnswerModal.jsx";
 import ChatMessage from "./ChatMessage.jsx"
 
 function RenderChatMessage({ message, mephistoContext, appContext, idx }) {
@@ -50,8 +51,14 @@ function MainApp() {
   const [turnsRemaining, setTurnsRemaining] = React.useState(-1);
   const [providedQuestions, setProvidedQuestions] = React.useState([]);
   const [amountEarned, setAmountEarned] = React.useState(0.0);
+  const [currentAnswer, setCurrentAnswer] = React.useState('');
+  const [currentQuestion, setCurrentQuestion] = React.useState('');
+  const [showSameAnswerModal, setShowSameAnswerModal] = React.useState(false);
+  const [firstQuestionProvided, setFirstQuestionProvided] = React.useState(false);
+  const [doNotDisturb, setDoNotDisturb] = React.useState(false);
 
   return (
+    <div>
     <ChatApp
       turnsRemaining={turnsRemaining}
       setAmountEarned={setAmountEarned}
@@ -94,6 +101,11 @@ function MainApp() {
           amountEarned={amountEarned}
           setAmountEarned={setAmountEarned}
           taskConfig={mephistoContext.taskConfig}
+          setCurrentQuestion={setCurrentQuestion}
+          setShowSameAnswerModal={setShowSameAnswerModal}
+          firstQuestionProvided={firstQuestionProvided}
+          setFirstQuestionProvided={setFirstQuestionProvided}
+          doNotDisturb={doNotDisturb}
         />
       )}
       onMessagesChange={(messages) => {
@@ -105,6 +117,9 @@ function MainApp() {
           if ('requires_bool_input' in message) {
             if (message.requires_bool_input) {
               setBoolResponse(true);
+              if ('answer' in message) {
+                setCurrentAnswer(message.answer);
+              }
             } else {
               setBoolResponse(false);
             }
@@ -122,6 +137,8 @@ function MainApp() {
         }
       }}
     />
+    <SameAnswerModal showSameAnswerModal={showSameAnswerModal} setShowSameAnswerModal={setShowSameAnswerModal} currentAnswer={currentAnswer} currentQuestion={currentQuestion} firstQuestionProvided={firstQuestionProvided} setDoNotDisturb={setDoNotDisturb} />
+    </div>
   );
 }
 
