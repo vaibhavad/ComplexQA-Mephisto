@@ -14,13 +14,15 @@ const BOOL_MORE_QUESTIONS_MESSAGE = "It is possible to form another complex ques
 const TEXT_INPUT_MESSAGE = "Please provide the complex question below"
 const MAX_QUESTIONS_PER_TURN = 3
 const MOVE_TO_NEXT_TURN_MESSAGE = "Only " + MAX_QUESTIONS_PER_TURN + " complex questions allowed per turn. Please move to the next turn."
+const SAME_ANSWER_MODEL_PROB = 0.3
 
-function TextResponse({ onMessageSend, active, boolResponse, boolResponseProvideMoreQuestions, amountEarned, setAmountEarned, taskConfig, setCurrentQuestion, setShowSameAnswerModal}) {
+function TextResponse({ onMessageSend, active, boolResponse, boolResponseProvideMoreQuestions, amountEarned, setAmountEarned, taskConfig, setCurrentQuestion, setShowSameAnswerModal }) {
 
   const [textValue, setTextValue] = React.useState("");
   const [sending, setSending] = React.useState(false);
   const [numComplexPerTurn, setNumComplexPerTurn] = React.useState(0);
   const [shownSameAnswerModalOnce, setShownSameAnswerModalOnce] = React.useState(false);
+  const [firstQuestionProvided, setFirstQuestionProvided] = React.useState(false);
 
   const inputRef = React.useRef();
 
@@ -32,9 +34,12 @@ function TextResponse({ onMessageSend, active, boolResponse, boolResponseProvide
 
   const tryMessageSend = React.useCallback(() => {
     setCurrentQuestion(textValue);
-    if (!shownSameAnswerModalOnce) {
-      setShownSameAnswerModalOnce(true);
-      setShowSameAnswerModal(true);
+    if (!firstQuestionProvided || Math.random() < SAME_ANSWER_MODEL_PROB) {
+      if (!shownSameAnswerModalOnce) {
+        setShownSameAnswerModalOnce(true);
+        setShowSameAnswerModal(true);
+        setFirstQuestionProvided(true);
+      }
     }
     else if (textValue !== "" && active && !sending) {
       setSending(true);
@@ -46,7 +51,7 @@ function TextResponse({ onMessageSend, active, boolResponse, boolResponseProvide
         setShownSameAnswerModalOnce(false);
       });
     }
-  }, [textValue, active, sending, onMessageSend, shownSameAnswerModalOnce]);
+  }, [textValue, active, sending, onMessageSend, shownSameAnswerModalOnce, firstQuestionProvided]);
 
   const tryBoolMessageSend = React.useCallback((boolValue) => {
     if (active && !sending) {
@@ -59,7 +64,7 @@ function TextResponse({ onMessageSend, active, boolResponse, boolResponseProvide
   }, [active, sending, onMessageSend]);
 
   const tryBoolMessageProvideMoreQuestions = React.useCallback((boolValue) => {
-    if (!boolValue){
+    if (!boolValue) {
       setNumComplexPerTurn(0);
     }
     if (active && !sending) {
