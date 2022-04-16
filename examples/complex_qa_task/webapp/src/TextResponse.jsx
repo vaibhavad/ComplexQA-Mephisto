@@ -15,11 +15,12 @@ const TEXT_INPUT_MESSAGE = "Please provide the complex question below"
 const MAX_QUESTIONS_PER_TURN = 3
 const MOVE_TO_NEXT_TURN_MESSAGE = "Only " + MAX_QUESTIONS_PER_TURN + " complex questions allowed per turn. Please move to the next turn."
 
-function TextResponse({ onMessageSend, active, boolResponse, boolResponseProvideMoreQuestions, amountEarned, setAmountEarned, taskConfig}) {
+function TextResponse({ onMessageSend, active, boolResponse, boolResponseProvideMoreQuestions, amountEarned, setAmountEarned, taskConfig, setCurrentQuestion, setShowSameAnswerModal}) {
 
   const [textValue, setTextValue] = React.useState("");
   const [sending, setSending] = React.useState(false);
   const [numComplexPerTurn, setNumComplexPerTurn] = React.useState(0);
+  const [shownSameAnswerModalOnce, setShownSameAnswerModalOnce] = React.useState(false);
 
   const inputRef = React.useRef();
 
@@ -30,16 +31,22 @@ function TextResponse({ onMessageSend, active, boolResponse, boolResponseProvide
   }, [active]);
 
   const tryMessageSend = React.useCallback(() => {
-    if (textValue !== "" && active && !sending) {
+    setCurrentQuestion(textValue);
+    if (!shownSameAnswerModalOnce) {
+      setShownSameAnswerModalOnce(true);
+      setShowSameAnswerModal(true);
+    }
+    else if (textValue !== "" && active && !sending) {
       setSending(true);
       onMessageSend({ text: textValue, task_data: {} }).then(() => {
         setTextValue("");
         setSending(false);
         setAmountEarned(amountEarned + taskConfig.task_reward_question);
         setNumComplexPerTurn(numComplexPerTurn + 1);
+        setShownSameAnswerModalOnce(false);
       });
     }
-  }, [textValue, active, sending, onMessageSend]);
+  }, [textValue, active, sending, onMessageSend, shownSameAnswerModalOnce]);
 
   const tryBoolMessageSend = React.useCallback((boolValue) => {
     if (active && !sending) {
