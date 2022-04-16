@@ -57,6 +57,8 @@ class MultiAgentDialogWorld(CrowdTaskWorld):
                 "text": " ",
                 "question": turn["Question"],
                 "answer": turn["Answer"],
+                "turn_id": turn["Turn_no"],
+                "conv_id": turn["Conversation_no"],
                 "turns_remaining": turns_remaining,
                 "episode_done": False,
             }
