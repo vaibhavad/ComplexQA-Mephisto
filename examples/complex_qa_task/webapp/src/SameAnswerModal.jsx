@@ -2,10 +2,14 @@ import React from "react";
 import { Button, Modal } from "react-bootstrap";
 
 
-function SameAnswerModal({ showSameAnswerModal, setShowSameAnswerModal, currentAnswer, currentQuestion }) {
+function SameAnswerModal({ showSameAnswerModal, setShowSameAnswerModal, currentAnswer, currentQuestion, firstQuestionProvided, setDoNotDisturb }) {
 
     const handleClose = () => setShowSameAnswerModal(false);
 
+    const handleNeverShowAgain = () => {
+        setDoNotDisturb(true);
+        setShowSameAnswerModal(false);
+    };
     return (
         <Modal show={showSameAnswerModal} onHide={handleClose}>
             <Modal.Header closeButton>
@@ -16,6 +20,9 @@ function SameAnswerModal({ showSameAnswerModal, setShowSameAnswerModal, currentA
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
+                { firstQuestionProvided ? <Button variant="secondary" style={{ backgroundColor: "orangered" }} onClick={handleNeverShowAgain}>
+                    Don't Remind Me Again
+                </Button> : null }
             </Modal.Footer>
         </Modal>
     );

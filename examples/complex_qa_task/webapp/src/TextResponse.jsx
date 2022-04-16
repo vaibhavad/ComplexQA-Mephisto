@@ -16,13 +16,12 @@ const MAX_QUESTIONS_PER_TURN = 3
 const MOVE_TO_NEXT_TURN_MESSAGE = "Only " + MAX_QUESTIONS_PER_TURN + " complex questions allowed per turn. Please move to the next turn."
 const SAME_ANSWER_MODEL_PROB = 0.3
 
-function TextResponse({ onMessageSend, active, boolResponse, boolResponseProvideMoreQuestions, amountEarned, setAmountEarned, taskConfig, setCurrentQuestion, setShowSameAnswerModal }) {
+function TextResponse({ onMessageSend, active, boolResponse, boolResponseProvideMoreQuestions, amountEarned, setAmountEarned, taskConfig, setCurrentQuestion, setShowSameAnswerModal, firstQuestionProvided, setFirstQuestionProvided, doNotDisturb }) {
 
   const [textValue, setTextValue] = React.useState("");
   const [sending, setSending] = React.useState(false);
   const [numComplexPerTurn, setNumComplexPerTurn] = React.useState(0);
   const [shownSameAnswerModalOnce, setShownSameAnswerModalOnce] = React.useState(false);
-  const [firstQuestionProvided, setFirstQuestionProvided] = React.useState(false);
 
   const inputRef = React.useRef();
 
@@ -34,12 +33,9 @@ function TextResponse({ onMessageSend, active, boolResponse, boolResponseProvide
 
   const tryMessageSend = React.useCallback(() => {
     setCurrentQuestion(textValue);
-    if (!firstQuestionProvided || Math.random() < SAME_ANSWER_MODEL_PROB) {
-      if (!shownSameAnswerModalOnce) {
-        setShownSameAnswerModalOnce(true);
-        setShowSameAnswerModal(true);
-        setFirstQuestionProvided(true);
-      }
+    if ((!firstQuestionProvided || Math.random() < SAME_ANSWER_MODEL_PROB) && !shownSameAnswerModalOnce && !doNotDisturb) {
+      setShownSameAnswerModalOnce(true);
+      setShowSameAnswerModal(true);
     }
     else if (textValue !== "" && active && !sending) {
       setSending(true);
@@ -49,9 +45,10 @@ function TextResponse({ onMessageSend, active, boolResponse, boolResponseProvide
         setAmountEarned(amountEarned + taskConfig.task_reward_question);
         setNumComplexPerTurn(numComplexPerTurn + 1);
         setShownSameAnswerModalOnce(false);
+        setFirstQuestionProvided(true);
       });
     }
-  }, [textValue, active, sending, onMessageSend, shownSameAnswerModalOnce, firstQuestionProvided]);
+  }, [textValue, active, sending, onMessageSend, shownSameAnswerModalOnce, firstQuestionProvided, doNotDisturb]);
 
   const tryBoolMessageSend = React.useCallback((boolValue) => {
     if (active && !sending) {

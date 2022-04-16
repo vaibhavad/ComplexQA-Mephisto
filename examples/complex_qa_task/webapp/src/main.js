@@ -54,6 +54,8 @@ function MainApp() {
   const [currentAnswer, setCurrentAnswer] = React.useState('');
   const [currentQuestion, setCurrentQuestion] = React.useState('');
   const [showSameAnswerModal, setShowSameAnswerModal] = React.useState(false);
+  const [firstQuestionProvided, setFirstQuestionProvided] = React.useState(false);
+  const [doNotDisturb, setDoNotDisturb] = React.useState(false);
 
   return (
     <div>
@@ -101,6 +103,9 @@ function MainApp() {
           taskConfig={mephistoContext.taskConfig}
           setCurrentQuestion={setCurrentQuestion}
           setShowSameAnswerModal={setShowSameAnswerModal}
+          firstQuestionProvided={firstQuestionProvided}
+          setFirstQuestionProvided={setFirstQuestionProvided}
+          doNotDisturb={doNotDisturb}
         />
       )}
       onMessagesChange={(messages) => {
@@ -132,7 +137,7 @@ function MainApp() {
         }
       }}
     />
-    <SameAnswerModal showSameAnswerModal={showSameAnswerModal} setShowSameAnswerModal={setShowSameAnswerModal} currentAnswer={currentAnswer} currentQuestion={currentQuestion} />
+    <SameAnswerModal showSameAnswerModal={showSameAnswerModal} setShowSameAnswerModal={setShowSameAnswerModal} currentAnswer={currentAnswer} currentQuestion={currentQuestion} firstQuestionProvided={firstQuestionProvided} setDoNotDisturb={setDoNotDisturb} />
     </div>
   );
 }
