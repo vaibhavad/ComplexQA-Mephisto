@@ -138,6 +138,8 @@ def format_worker_stats(
 def run_examine_by_worker(
     db: "MephistoDB",
     format_data_for_printing: Callable[[Dict[str, Any]], str],
+    calculate_task_bonus_from_data: Optional[Callable[[Dict[str, Any]], Tuple[float, str]]] = None,
+    calculate_qual_bonus: Optional[Callable[[Dict[str, Any]], Tuple[float, str, str]]] = None,
     task_name: Optional[str] = None,
     block_qualification: Optional[str] = None,
     approve_qualification: Optional[str] = None,
@@ -209,6 +211,11 @@ def run_examine_by_worker(
     # Run the review
     for w_id, w_units in units_by_worker.items():
         worker = Worker.get(db, w_id)
+        if calculate_qual_bonus is not None:
+            qual_bonus, qual_bonus_reason, qual_bonus_token = calculate_qual_bonus(worker)
+            agent = w_units[0].get_assigned_agent()
+            print(f"\n\nTrying to pay qualification bonus of {qual_bonus} to {worker.worker_name}")
+            agent.pay_bonus(qual_bonus, qual_bonus_reason, qual_bonus_token)
         worker_name = worker.worker_name
         apply_all_decision = None
         reason = None
@@ -238,6 +245,11 @@ def run_examine_by_worker(
             ), f"Can't make decision on None agent... issue with {unit}"
             if decision.lower() == "a":
                 agent.approve_work()
+                if calculate_task_bonus_from_data is not None:
+                    bonus, message = calculate_task_bonus_from_data(data_browser.get_data_from_unit(unit))
+                    if bonus > 0.0:
+                        print(f"Trying to pay task bonus of {bonus} to {worker.worker_name}")
+                        agent.pay_bonus(bonus, message, f"{worker_name}_{unit.get_mturk_assignment_id()}")
                 if decision == "A" and approve_qualification is not None:
                     should_special_qualify = input(
                         "Do you want to approve qualify this worker? (y)es/(n)o: "
@@ -270,6 +282,8 @@ def run_examine_by_worker(
 def run_examine_or_review(
     db: "MephistoDB",
     format_data_for_printing: Callable[[Dict[str, Any]], str],
+    calculate_task_bonus_from_data: Optional[Callable[[Dict[str, Any]], Tuple[float, str]]] = None,
+    calculate_qual_bonus: Optional[Callable[[Dict[str, Any]], Tuple[float, str, str]]] = None,
 ) -> None:
     do_review = input(
         "Do you want to (r)eview, or (e)xamine data? Default "
@@ -278,7 +292,7 @@ def run_examine_or_review(
     )
 
     if do_review.lower().startswith("r"):
-        run_examine_by_worker(db, format_data_for_printing)
+        run_examine_by_worker(db, format_data_for_printing, calculate_task_bonus_from_data, calculate_qual_bonus)
     else:
         start = 0
         end = 15

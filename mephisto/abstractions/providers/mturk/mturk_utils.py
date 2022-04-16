@@ -607,11 +607,14 @@ def approve_work(
         client.approve_assignment(
             AssignmentId=assignment_id, OverrideRejection=override_rejection
         )
-    except Exception as e:
-        logger.exception(
-            f"Approving MTurk assignment failed, likely because it has auto-approved. Details: {e}",
-            exc_info=True,
-        )
+    except ClientError as e:
+        if e.response["Error"]["Code"] == "RequestError":
+            logger.exception(
+                f"Approving MTurk assignment failed, likely because it has auto-approved.",
+                exc_info=True,
+            )
+        else:
+            raise e
 
 
 def reject_work(client: MTurkClient, assignment_id: str, reason: str) -> None:
@@ -671,14 +674,25 @@ def pay_bonus(
     if not check_mturk_balance(client, balance_needed=total_cost):
         print("Cannot pay bonus. Reason: Insufficient " "funds in your MTurk account.")
         return False
+    if '_sandbox' in worker_id:
+        worker_id = worker_id.replace('_sandbox', '')
+    try:
+        client.send_bonus(
+            WorkerId=worker_id,
+            BonusAmount=str(bonus_amount),
+            AssignmentId=assignment_id,
+            Reason=reason,
+            UniqueRequestToken=unique_request_token,
+        )
+        print(f"Paid {bonus_amount} to {worker_id}")
+    except ClientError as e:
+        if e.response['Error']['Code'] == 'RequestError' \
+                and f'{unique_request_token}' in e.response['Error']['Message']:
+            print(f'{bonus_amount} Bonus already paid to {worker_id}, using token {unique_request_token}')
+        else:
+            print("An error occured while trying to pay bonus")
+            raise e
 
-    client.send_bonus(
-        WorkerId=worker_id,
-        BonusAmount=str(bonus_amount),
-        AssignmentId=assignment_id,
-        Reason=reason,
-        UniqueRequestToken=unique_request_token,
-    )
 
     return True
 
