@@ -10,12 +10,35 @@ from mephisto.abstractions.databases.local_database import LocalMephistoDB
 from mephisto.tools.examine_utils import run_examine_or_review, print_results
 from mephisto.data_model.worker import Worker
 from mephisto.data_model.unit import Unit
+import json
 
 db = None
 
 QUAL_ID_SANDBOX = '3QG4W3BIFAZMGUY838Z4EKY6FWDWNM'
 QUAL_ID = '3DA2M59FD03MKSVQ6KIPVI7Q8Y2RXF'
 BONUS_AMOUNT = 1.0
+
+with open("/Users/vaibhav.adlakha/Desktop/topiocqa/topiocqa_train.json", "r") as f:
+    topiocqa_data = json.load(f)
+
+def get_ids(question, answer, conv_id):
+    matches = []
+    for turn in topiocqa_data:
+        if conv_id != -1:
+            if turn['Conversation_no'] == conv_id and turn['Question'] == question and turn['Answer'] == answer:
+                matches.append((turn['Conversation_no'], turn['Turn_no']))
+        else:
+            if turn['Question'] == question and turn['Answer'] == answer:
+                matches.append((turn['Conversation_no'], turn['Turn_no']))
+    if len(matches) == 0:
+        print(f"No matches found for {question} and {answer}")
+        return -1, -1
+    elif len(matches) > 1:
+        print(f"Multiple matches found for {question} and {answer}")
+        return -1, -1
+    else:
+        return matches[0]
+
 
 def calculate_qual_bonus(worker):
     worker_name = worker.worker_name
@@ -54,6 +77,10 @@ def calculate_task_bonus_from_data(data):
     return total_bonus_amount, bonus_message
 
 def format_for_printing_data(data):
+
+    with open("final_complex_dataset.json", "r") as f:
+        final_data = json.load(f)
+
     global db
     # Custom tasks can define methods for how to display their data in a relevant way
     worker_name = Worker.get(db, data["worker_id"]).worker_name
@@ -65,11 +92,30 @@ def format_for_printing_data(data):
 
     messages = [message for message in data["data"]["messages"] if "id" in message]
     output_string = ''
+    latest_answer = ''
+    conv_id = -1
+    turn_id = -1
+
     for message in messages:
         if message["id"] == 'System' and 'question' in message and 'answer' in message:
             output_string += f"\nQuestion: {message['question']}\nAnswer: {message['answer']}\n"
+            latest_answer = message['answer']
+            if 'conv_id' in message and 'turn_id' in message:
+                conv_id = message['conv_id']
+                turn_id = message['turn_id']
+            else:
+                conv_id, turn_id = get_ids(message['question'], message['answer'], conv_id)
         elif message["id"] == 'Chat Agent' and "text" in message:
             output_string += f"Complex Question: {message['text']}\n"
+            final_data.append({
+                "question": message['text'],
+                "answer": latest_answer,
+                "conversation_no": conv_id,
+                "turn_no": turn_id
+            })
+
+    with open("final_complex_dataset.json", "w") as f:
+        json.dump(final_data, f, indent=4)
 
     return f"-------------------\n{metadata_string}{output_string}"
 
